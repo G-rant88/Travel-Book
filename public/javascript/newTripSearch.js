@@ -194,18 +194,22 @@ $(function() {
             var url = '/search/' + searchQuery.country + '/' + searchQuery.city + '/' + searchQuery.categories.join('+');
         
             // console.log(searchQuery);
-            // console.log(url);
-
+             console.log(url);
+            location.assign(url);
             // redirect user to result page
-            $.ajax({
-                method: 'GET',
-                url: url,
-                success: function (response) {
-                    console.log(url)
-                    console.log('sent');
-                }
-            })
-        }
+        //     $.ajax({
+        //         method: 'GET',
+        //         url: url,
+        //         success: function (response) {
+        //             console.log(url)
+        //             console.log('sent');
+        //         }
+        //     }).then(function(event){
+
+        //         console.log("got");
+        //         location.assign("/results")
+        //     })
+         }
         else {
             console.log('fill out forms');
         }

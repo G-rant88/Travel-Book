@@ -7,10 +7,6 @@ module.exports = function(app) {
       res.render('newTripSearch');
     });
 
-	  app.get("/results", function(req, res) {
-      res.render("result");
-    });
-
 	  app.get("*", function(req, res) {
       res.render('newTripSearch');
     });
