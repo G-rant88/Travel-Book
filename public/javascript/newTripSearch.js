@@ -1,4 +1,13 @@
 $(function() {
+    // object to be sent to the results page
+    var searchQuery = {
+        country: '',
+        countryCode: '',
+        region: '',
+        city: '',
+        categories: []
+    }
+
     // capture country upon map click
     var map = AmCharts.makeChart( "chartdiv", {
         "type": "map",
@@ -41,6 +50,7 @@ $(function() {
                 }
                 event.mapObject.showAsSelected = !event.mapObject.showAsSelected
 
+                searchQuery.country = country;
                 // search country code by country name
                 getCountryCode(country);
               
@@ -62,6 +72,7 @@ $(function() {
             success: function (response) {
                 var countryCode = response[0].code;
 
+                searchQuery.countryCode = countryCode;
                 // search regions by country code -- api docs for battuta requires region search by country code
                 displayRegions(countryCode);
             }
@@ -105,13 +116,14 @@ $(function() {
         // if select is initialized and a region was selected, run search query for cities based on region
         if ($('#regions').hasClass('initialized') && $('#regions').val() !== null) {
             var region = $('#regions').val();
-            var queryUrl = 
+            searchQuery.region = region;
+            var queryUrl = 'https://battuta.medunes.net/api/city/' + searchQuery.countryCode +'/search/?region=' + region + '&key=7eb01d03d5b19318c32d8d7e7c73a5ba';
             $.ajax({
                 method: 'GET',
                 dataType: 'jsonp',
                 url: queryUrl,
                 success: function (response) {
-
+                    
                 }
             })
         }
