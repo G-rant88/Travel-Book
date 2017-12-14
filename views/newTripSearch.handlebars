@@ -26,13 +26,18 @@
         <select id="regions">
         </select>
     </div>
+    {{!-- dropdown options for cities --}}
+    <div class="input-field col s12">
+        <select id="cities">
+        </select>
+    </div>
     {{!-- dropdown options for amenities -- can pick multiple --}}
     <div class="input-field col s12">
-        <select multiple>
+        <select id="categories" multiple>
         <option value="" disabled selected>Choose amenities you'd like to search</option>
-        <option value="transport">Transportation</option>
-        <option value="housing">Accommodations</option>
-        <option value="food">Restaurants</option>
+        <option value="transportation">Transportation</option>
+        <option value="accommodations">Accommodations</option>
+        <option value="restaurants">Restaurants</option>
         </select>
     </div>
     {{!-- submit button --}}

@@ -1,4 +1,12 @@
 $(function() {
+    // object to be sent to the results page
+    var searchQuery = {
+        country: null,
+        region: null,
+        city: null,
+        categories: null
+    }
+
     // capture country upon map click
     var map = AmCharts.makeChart( "chartdiv", {
         "type": "map",
@@ -41,8 +49,13 @@ $(function() {
                 }
                 event.mapObject.showAsSelected = !event.mapObject.showAsSelected
 
+                searchQuery.country = country.toLowerCase();
+
+                $('#regions').material_select('destroy');
+                $('#cities').material_select('destroy');
+                $('#categories').material_select('destroy');
                 // search country code by country name
-                getCountryCode(country);
+                findCountry(country);
               
             }
         } ],  
@@ -51,32 +64,43 @@ $(function() {
         "position": "bottom-right"
         }
     });
-
-    function getCountryCode (country) {
+    //*************************************************//
+    function findCountry (country) {
         // once country is selected, make get request to get country code
-        var queryUrl = 'http://battuta.medunes.net/api/country/search/?country=' + country + '&key=7eb01d03d5b19318c32d8d7e7c73a5ba';
+        var queryUrl = 'https://api.teleport.org/api/countries/';
         $.ajax({
             method: 'GET',
-            dataType: 'jsonp',
             url: queryUrl,
             success: function (response) {
-                var countryCode = response[0].code;
-
-                // search regions by country code -- api docs for battuta requires region search by country code
-                displayRegions(countryCode);
+                var countries = response['_links']['country:items'];
+                for (var i=0; i < countries.length; i++) {
+                    if (country === countries[i].name) {
+                        // console.log(country + ' was found!');
+                        // pass url to next function to make get req
+                        getRegions(countries[i].href);
+                    }
+                }
             }
         })
     }
 
-    function displayRegions (countryCode) {
-        var queryUrl = 'http://battuta.medunes.net/api/region/' + countryCode + '/all/?key=7eb01d03d5b19318c32d8d7e7c73a5ba';
+    function getRegions (url) {
+        $.ajax({
+            method: 'GET',
+            url: url,
+            success: function (response) {
+                var url = response['_links']['country:admin1_divisions'].href;
+                displayRegions(url);
+            }
+        })
+    }
+
+    function displayRegions (url) {
         // with country code, query for regions
         $.ajax({
             method: 'GET',
-            dataType: 'jsonp',
-            url: queryUrl,
+            url: url,
             success: function (response) {
-                console.log(response);
                 // destroy and recreate select options
                 // allows user to pick a different country without reloading page
                 $('#regions').empty();
@@ -84,10 +108,11 @@ $(function() {
                 // placeholder for dropdown options
                 $('#regions').append('<option value="" disabled selected>Choose a region</option>');     
 
+                var regions = response['_links']['a1:items'];
                 // add all regions from query into list
                     // populate dropdown list with regions to select from
-                for (var i=0; i < response.length; i++) {
-                    var region = $('<option>').addClass('region').attr('value', response[i].region).text(response[i].region);
+                for (var i=0; i < regions.length; i++) {
+                    var region = $('<option>').addClass('region').attr('value', regions[i].name).text(regions[i].name).attr('link', regions[i].href);
                     $('#regions').append(region);
                 }
                 
@@ -104,17 +129,86 @@ $(function() {
     function getRegion () {
         // if select is initialized and a region was selected, run search query for cities based on region
         if ($('#regions').hasClass('initialized') && $('#regions').val() !== null) {
-            var region = $('#regions').val();
-            var queryUrl = 
+            var region = $('#regions option:selected').val();
+            //console.log(region);
+            searchQuery.region = region.toLowerCase();
+            var url = $('#regions option:selected').attr('link');
+            //console.log(url);
+            displayCities(url);
+        }
+    }
+
+    //////////////////////////////////////////////////////////
+
+    function displayCities (url) {
+        $.ajax({
+            method: 'GET',
+            url: url + '/cities/',
+            success: function (response) {
+                // destroy and recreate select options
+                // allows user to pick a different country without reloading page
+                $('#cities').empty();
+
+                // placeholder for dropdown options
+                $('#cities').append('<option value="" disabled selected>Choose a city</option>');     
+
+                var cities = response['_links']['city:items'];
+                
+                // add all cities from query into list
+                // populate dropdown list with cities to select from
+                for (var i=0; i < cities.length; i++) {
+                    var city = $('<option>').addClass('city').attr('value', cities[i].name).text(cities[i].name).attr('link', cities[i].href);
+                    $('#cities').append(city);
+                }
+                
+                // show cities dropdown newly populated with cities           
+                $('#cities').material_select();
+            }
+        })
+    }
+
+    // listens for any changes made to the dropdown
+    $('#cities').change(getCity);
+    
+    function getCity () {
+        // if select is initialized and a city was selected, run search query for cities based on city
+        if ($('#cities').hasClass('initialized') && $('#cities').val() !== null) {
+            var city = $('#cities option:selected').val();
+            searchQuery.city = city.toLowerCase();
+            // show categories
+            $('#categories').material_select();
+        }
+    }
+
+    $('#categories').change(function () {
+        var categories = $('#categories').val();
+        searchQuery.categories = categories;
+    });
+
+    $('#trip-search-submit').click(function (event) {
+        event.preventDefault();
+        // check if user completed the form (chose amenities)
+        if (searchQuery.categories !== null) {
+
+            // redriect url when form is submitted
+            var url = '/search/' + searchQuery.country + '/' + searchQuery.city + '/' + searchQuery.categories.join('+');
+        
+            // console.log(searchQuery);
+            // console.log(url);
+
+            // redirect user to result page
             $.ajax({
                 method: 'GET',
-                dataType: 'jsonp',
-                url: queryUrl,
+                url: url,
                 success: function (response) {
-
+                    console.log(url)
+                    console.log('sent');
                 }
             })
         }
-    }
+        else {
+            console.log('fill out forms');
+        }
+    })
 
 });
