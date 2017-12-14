@@ -63,12 +63,12 @@ $(function() {
                 var countryCode = response[0].code;
 
                 // search regions by country code -- api docs for battuta requires region search by country code
-                getRegions(countryCode);
+                displayRegions(countryCode);
             }
         })
     }
 
-    function getRegions (countryCode) {
+    function displayRegions (countryCode) {
         var queryUrl = 'http://battuta.medunes.net/api/region/' + countryCode + '/all/?key=7eb01d03d5b19318c32d8d7e7c73a5ba';
         // with country code, query for regions
         $.ajax({
@@ -94,12 +94,18 @@ $(function() {
                 // show regions dropdown newly populated with regions           
                 $('#regions').material_select();
 
-                // add on click listener on dropdown item
-                // on click, get request for region's cities
-                // console.log($('#regions').val());
-
             }
         })
+    }
+
+    // listens for any changes made to the dropdown
+    $('#regions').change(getRegion);
+
+    function getRegion () {
+        // if select is initialized and a region was selected, run search query for cities based on region
+        if ($('#regions').hasClass('initialized') && $('#regions').val() !== null) {
+            console.log($('#regions').val());
+        }
     }
 
 });
