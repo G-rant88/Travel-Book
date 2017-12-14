@@ -1,11 +1,11 @@
 $(function() {
     // object to be sent to the results page
     var searchQuery = {
-        country: '',
-        countryCode: '',
-        region: '',
-        city: '',
-        categories: []
+        country: null,
+        countryCode: null,
+        region: null,
+        city: null,
+        categories: null
     }
 
     // capture country upon map click
@@ -51,6 +51,10 @@ $(function() {
                 event.mapObject.showAsSelected = !event.mapObject.showAsSelected
 
                 searchQuery.country = country;
+
+                $('#regions').material_select('destroy');
+                $('#cities').material_select('destroy');
+                $('#categories').material_select('destroy');
                 // search country code by country name
                 getCountryCode(country);
               
@@ -73,6 +77,7 @@ $(function() {
                 var countryCode = response[0].code;
 
                 searchQuery.countryCode = countryCode;
+
                 // search regions by country code -- api docs for battuta requires region search by country code
                 displayRegions(countryCode);
             }
@@ -87,7 +92,6 @@ $(function() {
             dataType: 'jsonp',
             url: queryUrl,
             success: function (response) {
-                console.log(response);
                 // destroy and recreate select options
                 // allows user to pick a different country without reloading page
                 $('#regions').empty();
@@ -132,6 +136,7 @@ $(function() {
             url: queryUrl,
             success: function (response) {
                 console.log(response);
+                console.log(typeof response);
                 // destroy and recreate select options
                 // allows user to pick a different country without reloading page
                 $('#cities').empty();
@@ -139,15 +144,22 @@ $(function() {
                 // placeholder for dropdown options
                 $('#cities').append('<option value="" disabled selected>Choose a city</option>');     
 
-                // add all cities from query into list
+                // not all regions have cities
+                if (response.length > 0) {
+                    // add all cities from query into list
                     // populate dropdown list with cities to select from
-                for (var i=0; i < response.length; i++) {
-                    var city = $('<option>').addClass('city').attr('lat', response[i].latitude).attr('long', response[i].longitude).attr('value', response[i].city).text(response[i].city);
-                    $('#cities').append(city);
+                    for (var i=0; i < response.length; i++) {
+                        var city = $('<option>').addClass('city').attr('lat', response[i].latitude).attr('long', response[i].longitude).attr('value', response[i].city).text(response[i].city);
+                        $('#cities').append(city);
+                    }
+                    
+                    // show cities dropdown newly populated with cities           
+                    $('#cities').material_select();
                 }
-                
-                // show cities dropdown newly populated with cities           
-                $('#cities').material_select();
+                else {
+                     // show categories
+                    $('#categories').material_select();
+                }
 
             }
         })
@@ -161,8 +173,24 @@ $(function() {
         if ($('#cities').hasClass('initialized') && $('#cities').val() !== null) {
             var city = $('#cities').val();
             searchQuery.city = city;
-            console.log(city);
+            // show categories
+            $('#categories').material_select();
         }
     }
+
+    $('#categories').change(function () {
+        var categories = $('#categories').val();
+        searchQuery.categories = categories;
+    });
+
+    $('#trip-search-submit').click(function (event) {
+        event.preventDefault();
+        console.log(searchQuery);
+        if (searchQuery.categories !== null) {
+            // redirect user to result page
+            // send search query
+            console.log('sent');
+        }
+    })
 
 });
