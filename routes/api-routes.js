@@ -4,78 +4,102 @@ module.exports = function(app) {
 
   app.post("/signup", function(req, res) {
 
-  	db.user.create({
+    db.user.create({
 
-  		username: req.body.users,
-      	password: req.body.pws
+      username: req.body.users,
+      password: req.body.pws
 
-  	}).then(function(results){
+    }).then(function(results) {
 
-  		console.log("user added");
-  		console.log(results);
+      console.log("user added");
+      console.log(results);
 
-  		res.end();
-  	});
+      res.end();
+    });
   });
 
-    app.get("/login", function(req, res) {
+  app.get("/login", function(req, res) {
 
-  	db.user.findAll({}).then(function(results){
+    db.user.findAll({}).then(function(results) {
 
-  		console.log("found user data");
-  		console.log(results);
+      console.log("found user data");
+      console.log(results);
 
-  		res.json(results);
-  	});
+      res.json(results);
+    });
 
   });
 
- app.get("/search/:country/:city/:thing", function(req, res) {
+  app.get("/search/:country/:city/:categories", function(req, res) {
 
-  	db.post.findAll({
+    db.post.findAll({
 
-  		where:{
-  			country: req.params.country,
-  			city: req.params.city,
-  			thing: req.params.thing
-  		}
+      where: {
+        country: req.params.country,
+        city: req.params.city,
+        categories: req.params.categories
+      }
 
-  	}).then(function(results){
+    }).then(function(results) {
 
-  		console.log("found posts");
-  		console.log(results);
+      console.log("found posts");
+      console.log(results);
 
-  		res.render("result", results);
-  	});
+      var data = {
+
+        daty: results
+      }
+
+      console.log(data);
+
+      res.render("result", {
+        data
+      });
+    });
 
   });
 
   app.post("/add", function(req, res) {
 
-  	db.post.create({
+    db.post.create({
 
-  		country: req.body.country,
-  		city: req.body.city,
-  		review: req.body.review,
-  		thing: req.body.thing,
-  		image: req.body.image,
-  		price: req.body.price,
-  		rating: req.body.rating
+      country: req.body.country,
+      city: req.body.city,
+      review: req.body.review,
+      thing: req.body.thing,
+      image: req.body.image,
+      price: req.body.price,
+      rating: req.body.rating
 
-  	}).then(function(results){
+    }).then(function(results) {
 
-  		console.log("added post");
-  		console.log(results);
+      console.log("added post");
+      console.log(results);
 
-  		res.json(results);
-  	});
+      res.json(results);
+    });
 
   });
 
 
+  app.put("/loggedin", function(req, res) {
+
+    db.user.update({
+
+      loggedIn: true
+    }, {
+
+      where: {
+
+        id: req.body.info
+      }
+
+    }).then(function(results) {
+
+      res.end();
+
+    });
+
+  });
+
 };
-
-
-
-  
-

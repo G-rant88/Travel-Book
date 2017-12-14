@@ -1,5 +1,3 @@
-
-
 function run(){
 
   $.ajax("/login", {
@@ -28,8 +26,7 @@ function run(){
 
 //    run();
 
-
-$("#login").on("click", function(event) {
+$(".login").on("click", function(event) {
 
 
 
@@ -76,8 +73,20 @@ $("#logs").on("click", function(event) {
         if (data[i].username === info.users && data[i].password === info.pws && flag === false) {
           flag = true;
           var userid = data[i].id
-            // location.assign("/home/" + userid);
-          location.assign("/");
+
+          var infos = {
+
+            info: userid
+          }
+       
+         
+           $.ajax("/loggedin", {
+           type: "PUT",
+           data: infos
+          }).then(function(data) {
+
+          $("#modal1").modal('close');
+              });
         }
       }
 
