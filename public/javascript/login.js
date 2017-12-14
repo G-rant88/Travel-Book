@@ -9,11 +9,11 @@ $(document).ready(function() {
 
       console.log(cook);
 
-      for (var i = 0; i < data.datas.length; i++) {
+      for (var i = 0; i < data.length; i++) {
 
-        if (data.datas[i].username === cook) {
+        if (data[i].username === cook) {
 
-          var userid = data.datas[i].id;
+          var userid = data[i].id;
           // location.assign("/home/" + userid);
           location.assign("/");
 
@@ -90,42 +90,44 @@ $("#sign").on("click", function(event) {
 
   console.log(username);
   console.log(password);
-  // $.ajax("/login", {
-  //      type: "GET"
-  //    }).then(
-  //      function(data) {
 
-  //        // console.log(data);
-
-  //        for (var i = 0; i < data.datas.length; i++) {
-
-  //      if (data.datas[i].username === username) {
-  //        console.log(data.datas[i].username);
-  //        // console.log(username);
-
-  //   $("#print").html("Username is taken");
-  //   $("#print").css("color", "red");
-  //   return false;
-
-  //      }
-  //      }
-
-  var info = {
-    users: username,
-    pws: password
-  }
-
-  console.log(info);
-
-  $.ajax("/signup", {
-    type: "POST",
-    data: info
+  $.ajax("/login", {
+    type: "GET"
   }).then(
-    function() {
+    function(data) {
 
-      $("#modal1").modal();
-      $("#modal1").modal('open');
-    }
-  );
+      console.log(data);
+
+      for (var i = 0; i < data.length; i++) {
+
+        if (data[i].username === username) {
+
+          console.log(data[i].username);
+          console.log(username);
+
+          $("#print").html("Username is taken");
+          $("#print").css("color", "red");
+          return false;
+
+        }
+      }
+
+      var info = {
+        users: username,
+        pws: password
+      }
+
+      console.log(info);
+
+      $.ajax("/signup", {
+        type: "POST",
+        data: info
+      }).then(
+        function() {
+
+          $("#modal1").modal();
+          $("#modal1").modal('open');
+        }
+      );
+    });
 });
-// });
