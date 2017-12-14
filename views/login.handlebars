@@ -1,0 +1,198 @@
+<div id="size" class="row">
+  <style type="text/css">
+    #size{
+      margin-top: 15%;
+      color: dodgerblue
+    }
+
+    body{
+      background-color: lemonchiffon;
+    }
+  </style>
+  <div class="col s2"></div>
+  <div id="logins" class="col s8 center-align">
+      <h4>Welcome to Travel Book</h4>
+      <p id="print">Please Create an Account or Login Below</p>
+<form id="users" class="input-field">
+  <div>
+  <i class="material-icons prefix">account_circle</i>
+<input class="materialize-textarea" id="name" type="text"></input>
+<label for="icon_prefix2">Username</label>
+</div>
+</form>
+<form id="pws" class="input-field">
+<div>
+  <i class="material-icons prefix">fingerprint</i>
+<input class="materialize-textarea" id="pw" type="password"></input>
+<label for="icon_prefix2">Password</label>
+</div>
+</form>
+
+    <div>
+      <a id="sign" class="waves-effect waves-green btn-flat">Sign Up</a>
+      <button type="button" class="waves-effect waves-green btn-flat" id="logs">Login</button>
+    </div>
+  </div>
+  <div class="col s2"></div>
+</div>
+
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4>Travel Book</h4>
+      <hr>
+      <p class="mod">Thanks for creating an account!</p>
+      <p class="mod">Please Login with your username and password.</p>
+      <style type="text/css">
+        .mod{
+          color:dodgerblue;
+          font-weight: bold;
+          font-size: 25px;
+        }
+
+      </style>
+    </div>
+    <div class="modal-footer">
+      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Close</a>
+    </div>
+  </div>
+
+
+<script type="text/javascript">
+
+
+$( document ).ready(function() {
+   
+$.ajax("/login", {
+      type: "GET"
+    }).then(
+      function(data) {
+
+var cook = Cookies.get('name');
+
+console.log(cook);
+
+for (var i = 0; i < data.datas.length; i++) {
+
+if (data.datas[i].username === cook) {
+
+  var userid = data.datas[i].id;
+  // location.assign("/home/" + userid);
+  location.assign("/");
+
+}
+}
+});
+  });
+
+$("#logs").on("click", function(event){
+
+  var namey = $("#name").val();
+  var pwy = $("#pw").val();
+
+  if(namey === "" || pwy === ""){
+
+    $("#print").html("Username and Password are required");
+   $("#print").css("color", "red");
+    return false;
+  }
+
+   var username = $("#name").val().trim();
+    var password = $("#pw").val().trim();
+
+      Cookies.set('name', username);
+  
+    console.log(username);
+     console.log(password);
+ 
+
+    var info ={
+      users: username,
+      pws: password
+    }
+    $.ajax("/login", {
+      type: "GET",
+      data: info
+    }).then(
+    
+      function(data) {
+        var flag = false;
+        console.log(data);
+        console.log(data.reqs.users);
+        console.log(data.reqs.pws);
+        console.log(data.reqs.id);
+        console.log(data.daty[0].username);
+        console.log(data.daty[0].password);
+
+        for (var i = 0; i < data.daty.length; i++) {
+      if (data.daty[i].username === data.reqs.users && data.daty[i].password === data.reqs.pws && flag === false){
+        flag = true;
+           var userid = data.daty[i].id
+           // location.assign("/home/" + userid);
+           location.assign("/");
+}
+      }
+    
+    if(flag === false){
+        $("#print").html("Wrong Username/Password");
+        $("#print").css("color", "red");
+      }
+      }
+    );
+  });
+
+$("#sign").on("click", function(event){
+
+  var namey = $("#name").val();
+  var pwy = $("#pw").val();
+
+    if(namey === "" || pwy === ""){
+
+    $("#print").html("Username and Password are required");
+   $("#print").css("color", "red");
+    return false;
+  }
+
+  var username = $("#name").val().trim();
+    var password = $("#pw").val().trim();
+
+     console.log(user);
+    console.log(pw);
+ $.ajax("/login", {
+      type: "GET"
+    }).then(
+      function(data) {
+
+        console.log(data);
+
+        for (var i = 0; i < data.datas.length; i++) {
+          
+      if (data.datas[i].username === user) {
+        console.log(data.datas[i].username);
+        console.log(user);
+
+   $("#print").html("Username is taken");
+   $("#print").css("color", "red");
+   return false;
+   
+      }
+      }
+  
+    var info ={
+      users: username,
+      pws: password
+    }
+    $.ajax("/signup", {
+      type: "POST",
+      data: info
+    }).then(
+      function() {
+ 
+  $("#modal1").modal();
+  $("#modal1").modal('open');
+      }
+    );
+    }
+    );
+  });
+</script>
+
