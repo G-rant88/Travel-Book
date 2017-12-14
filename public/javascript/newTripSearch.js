@@ -117,15 +117,51 @@ $(function() {
         if ($('#regions').hasClass('initialized') && $('#regions').val() !== null) {
             var region = $('#regions').val();
             searchQuery.region = region;
-            var queryUrl = 'https://battuta.medunes.net/api/city/' + searchQuery.countryCode +'/search/?region=' + region + '&key=7eb01d03d5b19318c32d8d7e7c73a5ba';
-            $.ajax({
-                method: 'GET',
-                dataType: 'jsonp',
-                url: queryUrl,
-                success: function (response) {
-                    
+            displayCities(region);
+        }
+    }
+
+    //////////////////////////////////////////////////////////
+
+    function displayCities (region) {
+        var queryUrl = 'https://battuta.medunes.net/api/city/' + searchQuery.countryCode +'/search/?region=' + region + '&key=7eb01d03d5b19318c32d8d7e7c73a5ba';
+        // with country code, query for cities
+        $.ajax({
+            method: 'GET',
+            dataType: 'jsonp',
+            url: queryUrl,
+            success: function (response) {
+                console.log(response);
+                // destroy and recreate select options
+                // allows user to pick a different country without reloading page
+                $('#cities').empty();
+
+                // placeholder for dropdown options
+                $('#cities').append('<option value="" disabled selected>Choose a city</option>');     
+
+                // add all cities from query into list
+                    // populate dropdown list with cities to select from
+                for (var i=0; i < response.length; i++) {
+                    var city = $('<option>').addClass('city').attr('lat', response[i].latitude).attr('long', response[i].longitude).attr('value', response[i].city).text(response[i].city);
+                    $('#cities').append(city);
                 }
-            })
+                
+                // show cities dropdown newly populated with cities           
+                $('#cities').material_select();
+
+            }
+        })
+    }
+
+    // listens for any changes made to the dropdown
+    $('#cities').change(getCity);
+    
+    function getCity () {
+        // if select is initialized and a city was selected, run search query for cities based on city
+        if ($('#cities').hasClass('initialized') && $('#cities').val() !== null) {
+            var city = $('#cities').val();
+            searchQuery.city = city;
+            console.log(city);
         }
     }
 
