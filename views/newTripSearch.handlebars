@@ -1,0 +1,55 @@
+<!-- topnav -->
+<nav>
+    <div class="nav-wrapper">
+        <a href="#" class="brand-logo">Travel Tips</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="#">Trips You've Taken</a></li>
+        <li><a href="#">Your Saved Trips</a></li>
+        <li><a href="#">Plan New Trip</a></li>
+        <li><a href="#">Logout</a></li>
+        </ul>
+    </div>
+</nav>
+{{!-- main content --}}
+<div class="container">
+    {{!-- page title --}}
+    <div class="col s12 center-align">
+        <h3>Plan your next trip!</h3>
+    </div>
+    {{!-- <nav>
+        <div class="nav-wrapper">
+        <div class="col s12">
+            <a href="#!" class="breadcrumb">Pick a country</a>
+            <a href="#!" class="breadcrumb">Choose a city</a>
+            <a href="#!" class="breadcrumb">Amenity Search</a>
+        </div>
+        </div>
+    </nav> --}}
+    {{!-- map --}}
+    <div class="col s12 center-align">
+        <div id="chartdiv"></div> 
+    </div> 
+    {{!-- dropdown options for cities --}}
+    <div class="input-field col s12">
+        <select>
+        <option value="" disabled selected>Choose a city</option>
+        <option value="1">Option 1</option>
+        <option value="2">Option 2</option>
+        <option value="3">Option 3</option>
+        </select>
+    </div>
+    {{!-- dropdown options for amenities -- can pick multiple --}}
+    <div class="input-field col s12">
+        <select multiple>
+        <option value="" disabled selected>Choose amenities you'd like to search</option>
+        <option value="transport">Transportation</option>
+        <option value="housing">Accommodations</option>
+        <option value="food">Restaurants</option>
+        </select>
+    </div>
+    {{!-- submit button --}}
+    <div class="col s12 center-align">
+        <a class="waves-effect waves-light btn-large" id="trip-search-submit"><i class="material-icons left">search</i>Search</a>
+    </div>
+
+</div>
