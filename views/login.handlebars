@@ -117,16 +117,11 @@ $("#logs").on("click", function(event){
       function(data) {
         var flag = false;
         console.log(data);
-        console.log(data.reqs.users);
-        console.log(data.reqs.pws);
-        console.log(data.reqs.id);
-        console.log(data.daty[0].username);
-        console.log(data.daty[0].password);
 
-        for (var i = 0; i < data.daty.length; i++) {
-      if (data.daty[i].username === data.reqs.users && data.daty[i].password === data.reqs.pws && flag === false){
+        for (var i = 0; i < data.length; i++) {
+      if (data[i].username === info.users && data[i].password === info.pws && flag === false){
         flag = true;
-           var userid = data.daty[i].id
+           var userid = data[i].id
            // location.assign("/home/" + userid);
            location.assign("/");
 }
@@ -155,32 +150,35 @@ $("#sign").on("click", function(event){
   var username = $("#name").val().trim();
     var password = $("#pw").val().trim();
 
-     console.log(user);
-    console.log(pw);
- $.ajax("/login", {
-      type: "GET"
-    }).then(
-      function(data) {
+     console.log(username);
+    console.log(password);
+ // $.ajax("/login", {
+ //      type: "GET"
+ //    }).then(
+ //      function(data) {
 
-        console.log(data);
+ //        // console.log(data);
 
-        for (var i = 0; i < data.datas.length; i++) {
+ //        for (var i = 0; i < data.datas.length; i++) {
           
-      if (data.datas[i].username === user) {
-        console.log(data.datas[i].username);
-        console.log(user);
+ //      if (data.datas[i].username === username) {
+ //        console.log(data.datas[i].username);
+ //        // console.log(username);
 
-   $("#print").html("Username is taken");
-   $("#print").css("color", "red");
-   return false;
+ //   $("#print").html("Username is taken");
+ //   $("#print").css("color", "red");
+ //   return false;
    
-      }
-      }
+ //      }
+ //      }
   
     var info ={
       users: username,
       pws: password
     }
+
+    console.log(info);
+
     $.ajax("/signup", {
       type: "POST",
       data: info
@@ -193,6 +191,6 @@ $("#sign").on("click", function(event){
     );
     }
     );
-  });
+  // });
 </script>
 

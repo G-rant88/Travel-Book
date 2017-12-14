@@ -6,8 +6,8 @@ module.exports = function(app) {
 
   	db.user.create({
 
-  		username: req.body.username,
-      	password: req.body.password
+  		username: req.body.users,
+      	password: req.body.pws
 
   	}).then(function(results){
 
