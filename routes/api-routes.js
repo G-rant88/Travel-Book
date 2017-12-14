@@ -45,7 +45,7 @@ module.exports = function(app) {
   		console.log("found posts");
   		console.log(results);
 
-  		res.json(results);
+  		res.render("result", results);
   	});
 
   });
