@@ -1,6 +1,4 @@
 $(function() {
-    // functionality for drop down buttons
-    $('select').material_select();
     // capture country upon map click
     var map = AmCharts.makeChart( "chartdiv", {
         "type": "map",
@@ -43,20 +41,36 @@ $(function() {
                 }
                 event.mapObject.showAsSelected = !event.mapObject.showAsSelected
 
-                // once country is selected, make get request to get all cities
+                // once country is selected, make get request to get country code
                 var queryUrl = 'http://battuta.medunes.net/api/country/search/?country=' + country + '&key=7eb01d03d5b19318c32d8d7e7c73a5ba';
                 $.ajax({
                     method: 'GET',
                     dataType: 'jsonp',
-                    url: 'http://battuta.medunes.net/api/region/fr/all/?key=356d8f342d69d5495f4a64390458e841',
+                    url: queryUrl,
                     success: function (response) {
-                        // var regions = [];
-                        // // add all regions from query into list
-                        // for (var i=0; i < response.length; i++) {
-                        //     regions.push(response[i].region);
-                        // }
-                        // console.log(regions);
-                        console.log(response);
+                        var countryCode = response[0].code;
+                        var queryUrl = 'http://battuta.medunes.net/api/region/' + countryCode + '/all/?key=7eb01d03d5b19318c32d8d7e7c73a5ba';
+                        // with country code, query for regions
+                        $.ajax({
+                            method: 'GET',
+                            dataType: 'jsonp',
+                            url: queryUrl,
+                            success: function (response) {
+                                // add all regions from query into list
+                                    // populate dropdown list with regions to select from
+                                for (var i=0; i < response.length; i++) {
+                                    var region = $('<option>').attr('value', response[i].region).text(response[i].region);
+                                    $('#regions').append(region);
+                                }
+                                
+                                // show regions dropdown newly populated with regions
+                                $('#regions').material_select();
+
+                                // add on click listener on dropdown item
+                                // on click, get request for region's cities
+
+                            }
+                        })
                     }
                 });
             }
