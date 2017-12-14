@@ -185,11 +185,34 @@ $(function() {
 
     $('#trip-search-submit').click(function (event) {
         event.preventDefault();
-        console.log(searchQuery);
+        
+        // redriect url when form is submitted
+        var url;
+
+        // check if user completed the form (chose amenities)
         if (searchQuery.categories !== null) {
+            // if there was a city selected, include it in the params
+            if (searchQuery.city !== null) {
+                var categories = searchQuery.categories.join('+');
+                url = '/search/' + searchQuery.country + '/' + searchQuery.region + '/' + searchQuery.city + '/' + categories;
+            }
+            // if no city results, don't include in params
+            else {
+                var categories = searchQuery.categories.join('+');
+                url = '/search/' + searchQuery.country + '/' + searchQuery.region + '/' + categories;
+            }
+
             // redirect user to result page
-            // send search query
-            console.log('sent');
+            $.ajax({
+                method: 'GET',
+                url: url,
+                success: function () {
+                    console.log('sent');
+                }
+            })
+        }
+        else {
+            console.log('fill out forms');
         }
     })
 
