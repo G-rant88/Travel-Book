@@ -3,9 +3,12 @@ module.exports = function(sequelize, DataTypes) {
     
     country: {type:DataTypes.STRING, allowNull:false},
     city: {type:DataTypes.STRING, allowNull:false},
+    thing: {type:DataTypes.STRING, allowNull:false},
     review: {type:DataTypes.TEXT, allowNull:false},
+    category: {type:DataTypes.STRING, allowNull:false},
     image: DataTypes.STRING,
-    price: {type: DataTypes.DECIMAL, defaultValue: 1}
+    price: {type: DataTypes.DECIMAL, defaultValue: 0},
+    rating: {type: DataTypes.INTEGER, defaultValue: 4, len: [1,5]}
     
   });
 
