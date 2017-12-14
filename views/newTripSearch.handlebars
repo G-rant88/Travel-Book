@@ -1,0 +1,42 @@
+<!-- topnav -->
+<nav>
+    <div class="nav-wrapper">
+        <a href="#" class="brand-logo">Travel Tips</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="#">Trips You've Taken</a></li>
+        <li><a href="#">Your Saved Trips</a></li>
+        <li><a href="#">Plan New Trip</a></li>
+        <li><a href="#">Logout</a></li>
+        </ul>
+    </div>
+</nav>
+{{!-- main content --}}
+<div class="container">
+    {{!-- page title --}}
+    <div class="col s12 center-align">
+        <h3>Plan your next trip!</h3>
+    </div>
+    {{!-- map --}}
+    <div class="col s12 center-align">
+        <div id="chartdiv"></div> 
+    </div> 
+    {{!-- dropdown options for regions --}}
+    <div class="input-field col s12">
+        <select id="regions">
+        </select>
+    </div>
+    {{!-- dropdown options for amenities -- can pick multiple --}}
+    <div class="input-field col s12">
+        <select multiple>
+        <option value="" disabled selected>Choose amenities you'd like to search</option>
+        <option value="transport">Transportation</option>
+        <option value="housing">Accommodations</option>
+        <option value="food">Restaurants</option>
+        </select>
+    </div>
+    {{!-- submit button --}}
+    <div class="col s12 center-align">
+        <a class="waves-effect waves-light btn-large" id="trip-search-submit"><i class="material-icons left">search</i>Search</a>
+    </div>
+
+</div>
