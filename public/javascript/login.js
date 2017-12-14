@@ -1,4 +1,4 @@
-$(document).ready(function() {
+function run(){
 
   $.ajax("/login", {
     type: "GET"
@@ -14,13 +14,26 @@ $(document).ready(function() {
         if (data[i].username === cook) {
 
           var userid = data[i].id;
+          runflag = true;
           // location.assign("/home/" + userid);
           location.assign("/");
 
         }
       }
     });
-});
+}
+
+
+//    run();
+
+$(".login").on("click", function(event) {
+
+
+
+ $("#modal1").modal();
+          $("#modal1").modal('open');
+
+      });
 
 $("#logs").on("click", function(event) {
 
@@ -60,8 +73,20 @@ $("#logs").on("click", function(event) {
         if (data[i].username === info.users && data[i].password === info.pws && flag === false) {
           flag = true;
           var userid = data[i].id
-            // location.assign("/home/" + userid);
-          location.assign("/");
+
+          var infos = {
+
+            info: userid
+          }
+       
+         
+           $.ajax("/loggedin", {
+           type: "PUT",
+           data: infos
+          }).then(function(data) {
+
+          $("#modal1").modal('close');
+              });
         }
       }
 
@@ -124,9 +149,8 @@ $("#sign").on("click", function(event) {
         data: info
       }).then(
         function() {
-
-          $("#modal1").modal();
-          $("#modal1").modal('open');
+       $("#print").html("Thanks for creating an account!<br>Please Login with your username and password.");
+  
         }
       );
     });
