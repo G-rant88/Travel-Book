@@ -104,7 +104,16 @@ $(function() {
     function getRegion () {
         // if select is initialized and a region was selected, run search query for cities based on region
         if ($('#regions').hasClass('initialized') && $('#regions').val() !== null) {
-            console.log($('#regions').val());
+            var region = $('#regions').val();
+            var queryUrl = 
+            $.ajax({
+                method: 'GET',
+                dataType: 'jsonp',
+                url: queryUrl,
+                success: function (response) {
+
+                }
+            })
         }
     }
 
