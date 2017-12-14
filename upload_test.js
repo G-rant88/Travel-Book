@@ -5,8 +5,8 @@ var express = require('express'),
     multerS3 = require('multer-s3');
 
 aws.config.update({
-    secretAccessKey: '5e2GZFOWVhdlKJkAe76A7yscm5kCncwnXq7RBsBm',
-    accessKeyId: 'AKIAIPRKZVUFQBWEHWJQ',
+    secretAccessKey: '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',
+    accessKeyId: 'AKIAJAEIBYSFLQTHMKYQ',
     region: 'us-west-1'
 });
 
