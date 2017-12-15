@@ -21,7 +21,21 @@ $(function () {
             for (var i=0; i < resultInfo.price; i++) {
                 dollarSigns += '$';
             }
-            var resultItem = 'Name: ' + resultInfo.name + '<br>' + 'Price: ' + dollarSigns + '<br>' + 'Rating: ' + resultInfo.rating + '<br>' + 'Category: ' + resultInfo.categories + '<br>';
+            // display rating according to rating scale
+            var stars = '';
+            var count = 0;
+            // whole stars
+            for (var i=0; i < resultInfo.rating; i++) {
+                count++;
+                stars += '<i class="material-icons">star</i>';
+            }
+            // fill in remaining scale with empty stars
+            if (count < 5) {
+                for (var i=0; i < (5-count); i++) {
+                    stars += '<i class="material-icons">star_border</i>';
+                }
+            }
+            var resultItem = 'Name: ' + resultInfo.name + '<br>' + 'Price: ' + dollarSigns + '<br>' + 'Rating: ' + stars + '<br>' + 'Category: ' + resultInfo.categories + '<br>';
             $('#slide-out').append('<li>' + resultItem + '</li><hr>');
         }
         else {
