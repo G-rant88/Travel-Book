@@ -8,18 +8,12 @@ module.exports = function(app) {
     res.render('newTripSearch');
   });
 
-
-
   app.get("/saved", function(req, res) {
-    res.render('savedTrips');
+    res.render('travelBooks');
   });
 
   app.get("/future", function(req, res) {
     res.render('futureTrips');
-  });
-
-  app.get("/liked", function(req, res) {
-    res.render('favorites');
   });
 
   app.get('/add', function(req, res) {

@@ -1,0 +1,97 @@
+<nav>
+    <div class="nav-wrapper">
+        <a href="#" class="brand-logo">Travel Book</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a href="/user">Search By User</a></li>
+            <li><a href="/add">Add Post</a></li>
+         <li><a href="/saved">My Travel Book</a></li>
+        <li><a href="/future">My Planned Trips</a></li>
+        <li><a href="/">Plan New Trip</a></li>
+        <li><a class="login">Login</a></li>
+          <li><a class="logout">Logout</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    {{!-- page title --}}
+    <div class="col s12 center-align">
+        <h3>We found these results for your future trip to {{data.city}}, {{data.country}}!</h3>
+    </div>
+    {{!-- results data --}}
+    <div class="row">
+      {{#each data.daty}}
+       <div class="col s12 m4 center-align">
+          <div class="card blue-grey darken-1">
+            <div class="card-content white-text">
+              <span class="card-title">Place: {{name}}</span>
+              <img src=https://s3-us-west-2.amazonaws.com/travelbookpictures/{{image}} width="100%">
+              <p>Review: {{review}}</p>
+              <p><span class="rating">Rating: {{rating}}</span></p>
+              <p>Price: {{price}}</p>
+              <p>Written By: {{user.username}}</p>
+            </div>
+            <div class="card-action">
+              {{!-- change icon based on category; icons: local_dining, local_taxi, local_hotel--}}
+              <a href="#" class="add-btn" data-status="unadded" data-post-id="{{id}}" data-name="{{name}}" data-price="{{price}}" data-rating="{{rating}}" data-categories="{{categories}}"><i class="material-icons add">add_circle_outline</i></a>
+              <a href="#" class="like-btn" data-status="unliked" data-post-id="{{id}}" data-name="{{name}}" data-price="{{price}}" data-rating="{{rating}}" data-categories="{{categories}}"><i class="material-icons heart">favorite_border</i></a>
+            </div>
+          </div>
+      </div>
+      {{/each}}
+    </div>
+    {{!-- liked list as sidenav --}}
+    <ul id="slide-out" class="side-nav">
+        <li>
+          <h6>For a Future Trip</h6>
+        </li>
+        {{!-- selected items go here as li tags --}}
+    </ul>
+    {{!-- added list as sidenav --}}
+    <ul id="slide-right" class="side-nav">
+        <li>
+          <h6>For a Previous Trip</h6>
+        </li>
+        {{!-- selected items go here as li tags --}}
+    </ul>
+    
+    {{!-- contains buttons for viewing lists and submitting lists --}}
+    <div class="fixed-action-btn vertical">
+    <a class="btn-floating btn-large">
+      <i class="large material-icons">mode_edit</i>
+    </a>
+      <ul>
+        {{!-- shows liked list --}}
+        <li><a class="btn-floating red button-collapse" id="liked-list-btn" data-activates="slide-out"><i class="material-icons">loyalty</i></a></li>
+        {{!-- shows added list --}}
+        <li><a class="btn-floating yellow darken-1 button-collapse" id="added-list-btn" data-activates="slide-right"><i class="material-icons">history</i></a></li>
+        {{!-- triggers naming modal --}}
+        <li><a class="btn-floating blue modal-trigger" href="#naming-trip" id="modal-btn"><i class="material-icons">send</i></a></li>
+      </ul>
+    </div>
+
+    {{!-- modal for naming a previous trip and/or new trip --}}
+    <!-- Modal Structure -->
+    <div id="naming-trip" class="modal">
+      <div class="modal-content">
+        <h4>Great! Now, what would you like to name your trip?</h4>
+        {{!-- name new trip --}}
+        <div class="input-field col s6">
+          <i class="material-icons prefix">mode_edit</i>
+          <input class="previous-trip-name" id="icon_prefix" type="text" class="validate">
+          <label for="icon_prefix">Previous Trip Name</label>
+        </div>
+        {{!-- name previous trip --}}
+        <div class="input-field col s6">
+          <i class="material-icons prefix">mode_edit</i>
+          <input class="future-trip-name" id="icon_prefix" type="text" class="validate">
+          <label for="icon_prefix">Future Trip Name</label>
+        </div>
+        <a class="waves-effect waves-light btn" id="submit-list-btn">Submit</a>
+      </div>
+    </div>
+          
+
+</div>
+
+{{>login}}
