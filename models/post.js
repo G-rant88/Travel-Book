@@ -13,8 +13,10 @@ module.exports = function(sequelize, DataTypes) {
   });
 
 post.associate = function(models) {
-    post.belongsToMany(models.user, {
-      through: "post2user"
+    post.belongsTo(models.user, {
+      foreignKey: {
+        allowNull: false
+      }
     });
   };
 

@@ -62,13 +62,14 @@ module.exports = function(app) {
       where: {
         country: req.params.country,
         city: req.params.city,
-        categories: req.params.categories
-      }
+        categories: req.params.categories,
+      },
+      include: [db.user]
 
     }).then(function(results) {
 
       // console.log("found posts");
-      // console.log(results);
+       console.log(results);
 
       var data = {
         daty: results,
@@ -87,6 +88,19 @@ module.exports = function(app) {
     console.log(req.files[0].originalname);
     console.log(req.body);
     // res.send('worked');
+    console.log(req.body.user);
+
+    db.user.findOne({
+
+      where:{
+        username: req.body.user
+      }
+    }).then(function(results) {
+
+
+      console.log(results);
+      console.log(results.id);
+
     db.post.create({
       image: req.files[0].originalname,
       country: req.body.country,
@@ -95,7 +109,8 @@ module.exports = function(app) {
       name: req.body.name,
       categories: req.body.category,
       price: parseInt(req.body.pricepoint),
-      rating: parseInt(req.body.rating)
+      rating: parseInt(req.body.rating),
+      userId: results.id
 
     }).then(function(results) {
 
@@ -104,6 +119,8 @@ module.exports = function(app) {
 
       res.redirect("/");
     });
+
+  });
 
   });
 
@@ -129,15 +146,25 @@ module.exports = function(app) {
   });
 
 
+app.get("/user", function(req, res) {
 
+    db.user.findAll({
+    }).then(function(results) {
 
+      console.log(results);
 
+      var data = {
 
+        daty: results
 
+      }
 
+      console.log(data);
 
+      res.render("userSearch", {data})
 
-
+});
+  });
 
 
 

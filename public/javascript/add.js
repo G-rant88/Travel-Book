@@ -34,9 +34,10 @@ function initMap() {
 
     var placeId = place.place_id;
     var name = place.name;
+    var user = Cookies.get('name');
     // var city = cityCountry[0];
     // var country = cityCountry[1];
-
+    $("#user").attr("value", user);
     
     $('#pac-input').val("");
     $('#cityC').attr("value", city);
