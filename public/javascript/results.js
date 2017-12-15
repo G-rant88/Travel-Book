@@ -11,6 +11,7 @@ $(function () {
             // add result to liked list
                 // stored data to display in 
             var resultInfo = {
+                id: $(this).attr('data-post-id'),
                 name: $(this).attr('data-name'),
                 price: $(this).attr('data-price'),
                 rating: $(this).attr('data-rating'),
@@ -36,7 +37,7 @@ $(function () {
                 }
             }
             var resultItem = 'Name: ' + resultInfo.name + '<br>' + 'Price: ' + dollarSigns + '<br>' + 'Rating: ' + stars + '<br>' + 'Category: ' + resultInfo.categories + '<br>';
-            $('#slide-out').append('<li>' + resultItem + '</li><hr>');
+            $('#slide-out').append('<li  data-post-id="' + resultInfo.id + '">' + resultItem + '</li><hr>');
         }
         else {
             $(this).attr('data-status', 'unliked');
