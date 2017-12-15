@@ -7,9 +7,7 @@ module.exports = function(app) {
 		res.render('newTripSearch');
 	});
 
-	app.get("*", function(req, res) {
-		res.render('newTripSearch');
-	});
+
 
 	   app.get("/saved", function(req, res) {
       res.render('savedTrips');
