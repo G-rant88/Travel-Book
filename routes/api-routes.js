@@ -3,8 +3,8 @@ var aws = require('aws-sdk'),
     multerS3 = require('multer-s3');
 
 aws.config.update({
-    secretAccessKey: 'bkaNakIpMAWSQ5ygLr2BHeQCY9ZLx2FvJkP78Y3s',
-    accessKeyId: 'AKIAIWNTBP5S6VYNNWUQ',
+    secretAccessKey: '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',
+    accessKeyId: 'AKIAI4DSJ6IGKANH4VFA',
     region: 'us-west-1'
 });
 
@@ -82,21 +82,21 @@ module.exports = function(app) {
 
   });
 
-  app.post("/add", upload.array('upl',1),function(req, res) {
+  app.post("/add", upload.array('upl', 1), function(req, res) {
     console.log(req.files[0].originalname);
     console.log(req.body);
     // res.send('worked');
     db.post.create({
       image: req.files[0].originalname,
-      country: req.body.country.toLowerCase().trim(),
-      city: req.body.city.toLowerCase().trim(),
+      country: req.body.country,
+      city: req.body.city,
       review: req.body.review,
-      name: req.body.name.toLowerCase().trim(),
+      name: req.body.name,
       categories: req.body.category,
-      price: req.body.pricepoint,
-      rating: req.body.rating
+      price: parseInt(req.body.pricepoint),
+      rating: parseInt(req.body.rating)
 
-    }).then(function(results){
+    }).then(function(results) {
 
       console.log("added post");
       console.log(results.dataValues);

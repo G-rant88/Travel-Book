@@ -16,25 +16,28 @@ function initMap() {
 
 
     var cityCountry = [];
+    var city;
+    var country;
 
     for (var i = 0; i < place.address_components.length; i++) {
-      // console.log(place.address_components[i].long_name);
+
       for (var j = 0; j < place.address_components[i].types.length; j++) {
-        //console.log(place.address_components[i].types[j])
-        if (place.address_components[i].types[j] === 'locality' || place.address_components[i].types[j] === 'country') {
-          //   console.log(place.address_components[i].types[j])
-          cityCountry.push(place.address_components[i].long_name);
+    
+        if (place.address_components[i].types[j] === 'locality' ) {
+           city=place.address_components[i].long_name
+        }
+        if (place.address_components[i].types[j] === 'country') {
+          country = place.address_components[i].long_name;
         }
       }
     }
 
     var placeId = place.place_id;
     var name = place.name;
-    var city = cityCountry[0];
-    var country = cityCountry[1];
+    // var city = cityCountry[0];
+    // var country = cityCountry[1];
 
     
-    // $(document).ready(function() {
     $('#pac-input').val("");
     $('#cityC').attr("value", city);
     $('#countryC').attr("value", country);
