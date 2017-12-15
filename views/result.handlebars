@@ -15,6 +15,7 @@
     <div class="col s12 center-align">
         <h3>Search Results!</h3>
     </div>
+    {{!-- results data --}}
     <div class="row">
     	{{#each data.daty}}
     	 <div class="col s12 m4 center-align">
@@ -28,13 +29,37 @@
               <p>Price: {{price}}</p>
             </div>
             <div class="card-action">
-              <a href="#">Add to Trip</a>
-              <a href="#">Like</a>
+              <a href="#" class="like-btn" data-status="unliked"><i class="material-icons heart">favorite_border</i></a>
             </div>
           </div>
+      </div>
+      {{/each}}
     </div>
-		{{/each}}
+    {{!-- liked list as sidenav --}}
+    <ul id="slide-out" class="side-nav">
+        <li>
+          <div class="user-view">
+            <div class="background">
+            <img src="https://www.brainscape.com/blog/wp-content/uploads/2014/12/sunset-plane.png">
+            </div>
+            <a href="#" class="waves-effect waves-light btn"><span>Save new trip</span></a>
+          </div>
+        </li>
+        <li><a class="subheader">Transportation</a></li>
+        {{!-- selected items go here as li tags --}}
+        <li><div class="divider"></div></li>
+        <li><a class="subheader">Accommodations</a></li>
+        {{!-- selected items go here as li tags --}}
+        <li><div class="divider"></div></li>
+        <li><a class="subheader">Restaurants</a></li>
+        {{!-- selected items go here as li tags --}}
+    </ul>
+    {{!-- button to see sidenav --}}
+    <div class="fixed-action-btn" id="list-btn">
+      <a id="user-list" data-activates="slide-out" class="waves-effect waves-light btn btn-floating button-collapse" ><i class="material-icons">menu</i></a>
     </div>
+           
+
 </div>
 
 {{>login}}
