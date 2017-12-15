@@ -25,6 +25,11 @@ module.exports = function(app) {
 		res.render('add');	
     });
 
+   app.get('/user', function (req, res) {
+    res.render('userSearch');  
+    });
+
+
     app.get("*", function(req, res) {
       res.render('newTripSearch');
 
