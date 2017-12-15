@@ -101,7 +101,7 @@ module.exports = function(app) {
       console.log("added post");
       console.log(results.dataValues);
 
-      res.json(results);
+      res.redirect("/");
     });
 
   });
