@@ -1,10 +1,12 @@
+var amazonKeys = require("../key.js");
+console.log(amazonKeys.secretAccessKey );
 var aws = require('aws-sdk'),
     multer = require('multer'),
     multerS3 = require('multer-s3');
 
 aws.config.update({
-    secretAccessKey: 'wuZQRfRifOSmMsZB1ioPD6rP1hp5bGXb/7MdEJe7',
-    accessKeyId: 'AKIAIEBXCPZ7UT5UIQSQ',
+    secretAccessKey:  process.env.S3_SECRET_KEY || amazonKeys.secretAccessKey, 
+    accessKeyId: process.env.S3_ACCESS_KEY || amazonKeys.accessKeyId,
     region: 'us-west-1'
 });
 
