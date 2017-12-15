@@ -1,0 +1,47 @@
+<nav>
+    <div class="nav-wrapper">
+    <a href="#" class="brand-logo">Travel Book</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+             <li><a href="/user">Search By User</a></li>
+            <li><a href="/add">Add Post</a></li>
+         <li><a href="/saved">My Travel Book</a></li>
+        <li><a href="/future">My Planned Trips</a></li>
+        <li><a href="/">Plan New Trip</a></li>
+        <li><a class="login">Login</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    {{!-- page title --}}
+    <div class="row center-align">
+
+     
+          <h1>Users</h1>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th># of Posts</th>
+                <th>See User's Posts</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr id="form-row">
+                <form id="author-form">
+                  <td colspan="4">
+                    <input placeholder="Enter a name" id="author-name" type="text" />
+                  </td>
+                  <td><button type="submit" class="btn btn-success">Add User To My Trip</button>
+                  </td>
+                </form>
+              </tr>
+            </tbody>
+          </table>
+     
+      </div>
+    
+</div>
+<!-- <script src="js/author.js" type="text/javascript"></script> -->
+
+{{>login}}

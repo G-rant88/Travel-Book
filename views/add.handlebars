@@ -1,0 +1,76 @@
+<nav>
+    <div class="nav-wrapper">
+        <a href="#" class="brand-logo">Travel Book</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+           <li><a href="/user">Search By User</a></li>
+            <li><a href="/add">Add Post</a></li>
+         <li><a href="/saved">My Travel Book</a></li>
+        <li><a href="/future">My Planned Trips</a></li>
+        <li><a href="/">Plan New Trip</a></li>
+        <li><a class="login">Login</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row">
+        <h1>New Review</h1>
+      <form class="col s12" method="post" enctype="multipart/form-data" action="/add" id="newPost">
+          <div class="input-field col s12">
+            <input id="pac-input" class="controls" type="text" placeholder="Enter the place to review">
+          </div>
+          <div class="input-field col s12" >
+            <input name='name' id="place" placeholder="Place">
+          </div> 
+          <div class="input-field col s12" >
+            <input name='city' id="cityC" placeholder="City">
+          </div>  
+          <div class="input-field col s12">
+            <input name='country' id="countryC" placeholder="Country">
+          </div>  
+  
+        <div class="input-field col s12">
+            <select name='category' id="category" required>
+              <option value="" disabled selected>Choose the category</option>
+              <option name='category' value="food">Food</option>
+              <option name='category' value="attractions">Attractions</option>
+              <option name='category' value="accommodations">Accomodation</option>
+            </select>
+            <label>Category</label>
+          </div>
+        <div class="input-field col s12">
+            <select name='rating' id="rating" required>
+              <option value="" disabled selected>Choose your rating</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+            <label>Rating 1-5</label>
+          </div>
+          <div class="input-field col s12">
+              <select name='pricepoint' id="pricepoint" required>
+                <option value="" disabled selected>Price Point</option>
+                <option value="1">>$10 per person</option>
+                <option value="2">$10-20 per person</option>
+                <option value="3">>$20 per person</option>
+              </select>
+              <label>Indicate pricepoint</label>
+            </div>
+
+
+              <div class="input-field col s12">
+                <textarea name='review' id="review" class="materialize-textarea"></textarea>
+                <label for="textarea1">Enter your review</label>
+              </div>
+       
+              <div class="input-field col s12">
+                    <input id="upload" type="file" name="upl"/>    
+                    <input class="waves-effect waves-light btn" type="submit"/>
+              </div>
+
+      </form>
+      
+    </div>    
+</div>
