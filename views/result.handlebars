@@ -32,7 +32,7 @@
             </div>
             <div class="card-action">
               {{!-- change icon based on category; icons: local_dining, local_taxi, local_hotel--}}
-              <a href="#" class="category-icon" value=""><i class="material-icons">local_dining</i></a>
+              <a href="#" class="add-btn" data-status="unadded" data-post-id="{{id}}" data-name="{{name}}" data-price="{{price}}" data-rating="{{rating}}" data-categories="{{categories}}"><i class="material-icons add">add_circle_outline</i></a>
               <a href="#" class="like-btn" data-status="unliked" data-post-id="{{id}}" data-name="{{name}}" data-price="{{price}}" data-rating="{{rating}}" data-categories="{{categories}}"><i class="material-icons heart">favorite_border</i></a>
             </div>
           </div>
@@ -42,20 +42,29 @@
     {{!-- liked list as sidenav --}}
     <ul id="slide-out" class="side-nav">
         <li>
-          <div class="user-view">
-            <div class="background">
-            <img src="https://www.brainscape.com/blog/wp-content/uploads/2014/12/sunset-plane.png">
-            </div>
-            <a href="#" class="waves-effect waves-light btn"><span>Save new trip</span></a>
-          </div>
+          <h6>For a Future Trip</h6>
         </li>
         {{!-- selected items go here as li tags --}}
     </ul>
-    {{!-- button to see sidenav --}}
-    <div class="fixed-action-btn" id="list-btn">
-      <a id="user-list" data-activates="slide-out" class="waves-effect waves-light btn btn-floating button-collapse" ><i class="material-icons">menu</i></a>
+    {{!-- added list as sidenav --}}
+    <ul id="slide-right" class="side-nav">
+        <li>
+          <h6>For a Previous Trip</h6>
+        </li>
+        {{!-- selected items go here as li tags --}}
+    </ul>
+    
+    {{!-- contains buttons for viewing lists and submitting lists --}}
+    <div class="fixed-action-btn vertical">
+    <a class="btn-floating btn-large">
+      <i class="large material-icons">mode_edit</i>
+    </a>
+      <ul>
+        <li><a class="btn-floating red button-collapse" id="liked-list-btn" data-activates="slide-out"><i class="material-icons">loyalty</i></a></li>
+        <li><a class="btn-floating yellow darken-1 button-collapse" id="added-list-btn" data-activates="slide-right"><i class="material-icons">history</i></a></li>
+        <li><a class="btn-floating blue" id="submit-list-btn"><i class="material-icons">send</i></a></li>
+      </ul>
     </div>
-           
 
 </div>
 
