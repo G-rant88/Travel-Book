@@ -6,7 +6,7 @@ module.exports = function(sequelize, DataTypes) {
     name: {type:DataTypes.STRING, allowNull:false},
     review: {type:DataTypes.TEXT, allowNull:false},
     categories: {type:DataTypes.STRING, allowNull:false},
-    placeId: DataTypes.STRING,
+    // placeId: DataTypes.STRING,
     image: DataTypes.STRING,
     price: {type: DataTypes.INTEGER, defaultValue: 1, len: [1,5]},
     rating: {type: DataTypes.INTEGER, defaultValue: 3, len: [1,5]}
