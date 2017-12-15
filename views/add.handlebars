@@ -8,13 +8,14 @@
         <li><a href="/future">My Planned Trips</a></li>
         <li><a href="/">Plan New Trip</a></li>
         <li><a class="login">Login</a></li>
+          <li><a class="logout">Logout</a></li>
         </ul>
     </div>
 </nav>
 
 <div class="container">
     <div class="row">
-        <h1>New Review</h1>
+        <h1 class="names">Review</h1>
       <form class="col s12" method="post" enctype="multipart/form-data" action="/add" id="newPost">
           <div class="input-field col s12">
             <input id="pac-input" class="controls" type="text" placeholder="Enter the place to review">
@@ -28,6 +29,10 @@
           <div class="input-field col s12">
             <input name='country' id="countryC" placeholder="Country">
           </div>  
+          <div class="input-field col s12" style="display: none">
+            <input name='user' id="user" placeholder="User">
+          </div> 
+
   
         <div class="input-field col s12">
             <select name='category' id="category" required>
@@ -74,3 +79,4 @@
       
     </div>    
 </div>
+{{>login}}

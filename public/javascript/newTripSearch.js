@@ -216,3 +216,33 @@ $(function() {
     })
 
 });
+
+
+$( document ).ready(function() {
+    cook = Cookies.get('name');
+
+    if(cook === undefined){
+
+        $(".login").show();
+        $(".logout").hide();
+        return false;
+    }
+
+    $(".welcome").html("Welcome Back, " + cook);
+    $(".logout").show();
+    $(".login").hide();
+
+$(".names").prepend(cook+"'s ")
+
+
+});
+
+$(".logout").on("click", function(event){
+
+        Cookies.remove('name');
+         $(".login").show();
+        $(".logout").hide();
+        location.reload();
+});
+
+

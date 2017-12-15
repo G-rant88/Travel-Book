@@ -8,6 +8,7 @@
         <li><a href="/future">My Planned Trips</a></li>
         <li><a href="/">Plan New Trip</a></li>
         <li><a class="login">Login</a></li>
+          <li><a class="logout">Logout</a></li>
         </ul>
     </div>
 </nav>
@@ -21,21 +22,25 @@
           <table class="table table-striped">
             <thead>
               <tr>
-                <th>Name</th>
-                <th># of Posts</th>
-                <th>See User's Posts</th>
+                
+                <th>Name:</th>
+                <th># of Posts:</th>
+                <th>See User's Posts:</th>
               </tr>
             </thead>
             <tbody>
               <tr id="form-row">
                 <form id="author-form">
-                  <td colspan="4">
-                    <input placeholder="Enter a name" id="author-name" type="text" />
-                  </td>
-                  <td><button type="submit" class="btn btn-success">Add User To My Trip</button>
-                  </td>
+                 {{#each data.daty}}
+                  <td> {{username}}</td>
+                  <td>1</td>
+                  <td>Hi</td>
+                  <td>
+                  <button type="submit" class="btn btn-success">Add User To My Trip</button></td>
+                  </tr>
+                  {{/each}}
                 </form>
-              </tr>
+              
             </tbody>
           </table>
      

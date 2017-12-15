@@ -1,29 +1,3 @@
-function run(){
-
-  $.ajax("/login", {
-    type: "GET"
-  }).then(
-    function(data) {
-
-      var cook = Cookies.get('name');
-
-      console.log(cook);
-
-      for (var i = 0; i < data.length; i++) {
-
-        if (data[i].username === cook) {
-
-          var userid = data[i].id;
-          runflag = true;
-          // location.assign("/home/" + userid);
-          location.assign("/");
-
-        }
-      }
-    });
-}
-
-//    run();
 
 $(".login").on("click", function(event) {
 
@@ -84,7 +58,10 @@ $("#logs").on("click", function(event) {
            data: infos
           }).then(function(data) {
 
+            var cook = Cookies.set('name');
+
           $("#modal1").modal('close');
+          location.reload();
               });
         }
       }
