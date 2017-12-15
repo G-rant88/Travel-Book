@@ -143,6 +143,16 @@ module.exports = function(app) {
 
     });
 
+    app.post('/add/newtrip', function (req, res) {
+      console.log(req.body);
+      res.end();
+    });
+
+    app.post('/add/previoustrip', function (req, res) {
+      console.log(req.body);
+      res.end();
+    });
+
   });
 
 
