@@ -1,3 +1,26 @@
+var aws = require('aws-sdk'),
+    multer = require('multer'),
+    multerS3 = require('multer-s3');
+
+aws.config.update({
+    secretAccessKey: 'PTtOD/ai8b0POvYKnYoX3z7hQ/HGRNfg+cksm6fv',
+    accessKeyId: 'AKIAJWVYUZDAC355644Q',
+    region: 'us-west-1'
+});
+
+var s3 = new aws.S3();
+
+var upload = multer({
+    storage: multerS3({
+        s3: s3,
+        bucket: 'travelbookpictures',
+        key: function (req, file, cb) {
+            // console.log(file.originalname);
+            cb(null, file.originalname); //use Date.now() for unique file keys
+        }
+    })
+});
+
 var db = require("../models");
 
 module.exports = function(app) {
@@ -59,22 +82,24 @@ module.exports = function(app) {
 
   });
 
-  app.post("/add", function(req, res) {
-
+  app.post("/add", upload.array('upl',1),function(req, res) {
+    console.log(req.files[0].originalname);
+    console.log(req.body);
+    // res.send('worked');
     db.post.create({
-
-      country: req.body.country,
-      city: req.body.city,
+      image: req.files[0].originalname,
+      country: req.body.country.toLowerCase().trim(),
+      city: req.body.city.toLowerCase().trim(),
       review: req.body.review,
-      thing: req.body.thing,
-      image: req.body.image,
-      price: req.body.price,
+      name: req.body.name.toLowerCase().trim(),
+      categories: req.body.category,
+      price: req.body.pricepoint,
       rating: req.body.rating
 
-    }).then(function(results) {
+    }).then(function(results){
 
       console.log("added post");
-      console.log(results);
+      console.log(results.dataValues);
 
       res.json(results);
     });
@@ -101,5 +126,18 @@ module.exports = function(app) {
     });
 
   });
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 };
