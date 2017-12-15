@@ -9,6 +9,7 @@ $(function () {
             $(this).attr('data-status', 'liked');
             $(this).html('<i class="material-icons heart">favorite</i>');
             // add result to liked list
+                // stored data to display in 
             var resultInfo = {
                 name: $(this).attr('data-name'),
                 price: $(this).attr('data-price'),
@@ -20,9 +21,7 @@ $(function () {
             for (var i=0; i < resultInfo.price; i++) {
                 dollarSigns += '$';
             }
-            var name = $(this).attr('data-name');
             var resultItem = 'Name: ' + resultInfo.name + '<br>' + 'Price: ' + dollarSigns + '<br>' + 'Rating: ' + resultInfo.rating + '<br>' + 'Category: ' + resultInfo.categories + '<br>';
-            console.log(resultItem);
             $('#slide-out').append('<li>' + resultItem + '</li><hr>');
         }
         else {

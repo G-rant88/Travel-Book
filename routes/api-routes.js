@@ -42,19 +42,18 @@ module.exports = function(app) {
 
     }).then(function(results) {
 
-      console.log("found posts");
-      console.log(results);
+      // console.log("found posts");
+      // console.log(results);
 
       var data = {
-
-        daty: results
+        daty: results,
+        city: req.params.city,
+        country:req.params.country
       }
 
-      console.log(data);
+      console.log(data.daty);
 
-      res.render("result", {
-        data
-      });
+      res.render("result", {data});
     });
 
   });
