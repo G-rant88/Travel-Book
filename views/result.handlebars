@@ -60,11 +60,36 @@
       <i class="large material-icons">mode_edit</i>
     </a>
       <ul>
+        {{!-- shows liked list --}}
         <li><a class="btn-floating red button-collapse" id="liked-list-btn" data-activates="slide-out"><i class="material-icons">loyalty</i></a></li>
+        {{!-- shows added list --}}
         <li><a class="btn-floating yellow darken-1 button-collapse" id="added-list-btn" data-activates="slide-right"><i class="material-icons">history</i></a></li>
-        <li><a class="btn-floating blue" id="submit-list-btn"><i class="material-icons">send</i></a></li>
+        {{!-- triggers naming modal --}}
+        <li><a class="btn-floating blue modal-trigger" href="#naming-trip" id="modal-btn"><i class="material-icons">send</i></a></li>
       </ul>
     </div>
+
+    {{!-- modal for naming a previous trip and/or new trip --}}
+    <!-- Modal Structure -->
+    <div id="naming-trip" class="modal">
+      <div class="modal-content">
+        <h4>Great! Now, what would you like to name your trip?</h4>
+        {{!-- name new trip --}}
+        <div class="input-field col s6">
+          <i class="material-icons prefix">mode_edit</i>
+          <input class="previous-trip-name" id="icon_prefix" type="text" class="validate">
+          <label for="icon_prefix">Previous Trip Name</label>
+        </div>
+        {{!-- name previous trip --}}
+        <div class="input-field col s6">
+          <i class="material-icons prefix">mode_edit</i>
+          <input class="future-trip-name" id="icon_prefix" type="text" class="validate">
+          <label for="icon_prefix">Future Trip Name</label>
+        </div>
+        <a class="waves-effect waves-light btn" id="submit-list-btn">Submit</a>
+      </div>
+    </div>
+          
 
 </div>
 

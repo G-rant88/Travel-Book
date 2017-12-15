@@ -1,5 +1,9 @@
 $(function () {
+    // sidenav functionality
     $(".button-collapse").sideNav();
+
+    // modal functionality
+    $('.modal').modal();
 
     $('.like-btn').click(function (event) {
         event.preventDefault();
@@ -102,7 +106,10 @@ $(function () {
     $('#submit-list-btn').click(function (event) {
         // prevent refresh of page
         event.preventDefault();
-        console.log('clicked');
+        
+        // names for trips
+        var previousTripName = $('.previous-trip-name').val();
+        var futureTripName = $('.future-trip-name').val();
         
         // separate data for items for previous trips and future trips
         var previousItems = [];
@@ -111,36 +118,47 @@ $(function () {
         // add all items user wants to add to previous trip to specified 'previous' list
         $('.previous').each(function () {
             previousItems.push($(this).attr('data-post-id'));
-            console.log(previousItems);
         });
 
         // add all items user wants to add to future trip to specified 'future' list
         $('.future').each(function () {
             futureItems.push($(this).attr('data-post-id'));
-            console.log(futureItems);
         });
+
+        var previousTrip = {
+            name: previousTripName,
+            results: previousItems
+        };
+
+        var futureTrip = {
+            name: futureTripName,
+            results: futureItems
+        };
+
+        console.log(previousTrip);
+        console.log(futureTrip);
 
         // check if trip already exists
 
         // post request to add new trip to user acc
-        // $.post({
-        //     method: 'POST',
-        //     url: '/add/newtrip',
-        //     data: futureItems,
-        //     success: function () {
-        //         console.log('Created new trip');
-        //     }
-        // });
+        $.ajax({
+            method: 'POST',
+            url: '/add/newtrip',
+            data: futureTrip,
+            success: function () {
+                console.log('Created new trip');
+            }
+        });
 
         // // post request to update previous trip
-        // $.post({
-        //     method: 'POST',
-        //     url: '/add/previoustrip',
-        //     data: previousItems,
-        //     success: function () {
-        //         console.log('Updated past trip');                
-        //     }
-        // });
+        $.ajax({
+            method: 'POST',
+            url: '/add/previoustrip',
+            data: previousTrip,
+            success: function () {
+                console.log('Updated past trip');                
+            }
+        });
 
     });
 });
