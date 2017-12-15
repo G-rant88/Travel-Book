@@ -44,9 +44,8 @@ $(function () {
         else {
             $(this).attr('data-status', 'unliked');
             $(this).html('<i class="material-icons heart">favorite_border</i>');
-            // remove result from liked list
-            // iterate through liked list and find where the button
-            // console.log('' + $('li').find('data-post-id=' + resultInfo.id));
+            // remove result from liked list based on the post id
+            $('li[data-post-id="' + resultInfo.id + '"]').remove();
         }
     });
 });
