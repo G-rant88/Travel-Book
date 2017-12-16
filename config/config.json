@@ -14,6 +14,11 @@
     "dialect": "mysql"
   },
 
+ "username": "v7oda9i88v50rm1q",
+    "password": "gwnymxrdgjzj60gl",
+    "database": "lumtchq3hxoxnpmi",
+    "host": "tk3mehkfmmrhjg0b.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+    "use_env_variable": "mysql://v7oda9i88v50rm1q:gwnymxrdgjzj60gl@tk3mehkfmmrhjg0b.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/lumtchq3hxoxnpmi",
   "use_env_variable": "JAWSDB_URL",
     "dialect": "mysql"
   }
