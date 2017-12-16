@@ -225,12 +225,14 @@ $( document ).ready(function() {
 
         $(".login").show();
         $(".logout").hide();
+        $(".loginstuff").hide();
         return false;
     }
 
     $(".welcome").html("Welcome Back, " + cook);
     $(".logout").show();
     $(".login").hide();
+      $(".loginstuff").show();
 
 $(".names").prepend(cook+"'s ")
 
