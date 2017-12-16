@@ -1,6 +1,6 @@
 var amazonKeys = {
-    secretAccessKey: 'ZDywqSKuopSF65OIVrgyftFqmTVVtZ9L9mw4C/Dv',
-    accessKeyId: 'AKIAIA26DK7VMKAOTT4Q',
+    secretAccessKey: '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',
+    accessKeyId: 'AKIAIHGNA63IHPOUJWPA',
 }
 
 

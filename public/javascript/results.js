@@ -125,14 +125,18 @@ $(function () {
             futureItems.push($(this).attr('data-post-id'));
         });
 
+        var cook = Cookies.get('name');
+
         var previousTrip = {
             name: previousTripName,
-            results: previousItems
+            results: previousItems,
+            user: cook
         };
 
         var futureTrip = {
             name: futureTripName,
-            results: futureItems
+            results: futureItems,
+            user: cook
         };
 
         console.log(previousTrip);
@@ -160,5 +164,6 @@ $(function () {
             }
         });
 
+        location.assign("/");
     });
 });

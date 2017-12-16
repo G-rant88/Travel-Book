@@ -219,7 +219,8 @@ $(function() {
 
 
 $( document ).ready(function() {
-    cook = Cookies.get('name');
+   var cook = Cookies.get('name');
+
 
     if(cook === undefined){
 
@@ -247,4 +248,18 @@ $(".logout").on("click", function(event){
         location.reload();
 });
 
+$(".saved").on("click", function(event){
+    var cook = Cookies.get('name');
+
+    location.assign("/saved/"+cook);
+
+});
+
+
+$(".future").on("click", function(event){
+    var cook = Cookies.get('name');
+
+    location.assign("/future/"+cook);
+
+});
 
