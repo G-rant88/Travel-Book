@@ -47,8 +47,8 @@ module.exports = function(app) {
 
     db.user.findAll({}).then(function(results) {
 
-      console.log("found user data");
-      console.log(results);
+      // console.log("found user data");
+      // console.log(results);
 
       res.json(results);
     });
@@ -68,7 +68,7 @@ module.exports = function(app) {
 
     }).then(function(results) {
 
-      console.log(results);
+      // console.log(results);
       var data = {
         daty: results,
         city: req.params.city,
@@ -85,21 +85,12 @@ module.exports = function(app) {
   });
 
   app.post("/add", upload.array('upl', 1), function(req, res) {
-    // console.log(req.files[0].originalname);
-    // console.log(req.body);
-    // res.send('worked');
-    // console.log(req.body.user);
 
     db.user.findOne({
-
       where: {
         username: req.body.user
       }
     }).then(function(results) {
-
-
-      // console.log(results);
-      // console.log(results.id);
 
       db.post.create({
         image: req.files[0].originalname,
@@ -114,7 +105,6 @@ module.exports = function(app) {
 
       }).then(function(results) {
 
-        console.log("added post");
         console.log(results.dataValues);
 
         res.redirect("/");
@@ -177,30 +167,26 @@ module.exports = function(app) {
       }
     }).then(function(results) {
 
-
-      console.log(results[0].dataValues.past);
-      var pasts = results[0].dataValues.past;
+      console.log(results[0].dataValues.id);
 
       db.post.findAll({
 
         where: {
 
-          past: pasts
+          userid: results[0].dataValues.id
         },
-
         include: [db.user]
 
-      }).then(function(results1) {
+      }).then(function(postResults) {
 
-        var data = {
-
-          daty: results1,
-          dat: results1
+        console.log(postResults[0].dataValues)
+        var test = {
+          data: postResults
         }
 
-        console.log(data.daty);
+        console.log(test.data[0].dataValues.name)
         res.render('travelBooks', {
-          data
+          test
         });
 
       });
