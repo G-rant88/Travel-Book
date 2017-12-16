@@ -1,82 +1,90 @@
 <nav>
-    <div class="nav-wrapper">
-        <a href="#" class="brand-logo">Travel Book</a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-           <li><a class="loginstuff" href="/user">Search By User</a></li>
-            <li><a  class="loginstuff" href="/add">Add Post</a></li>
-         <li><a class="loginstuff saved">My Travel Book</a></li>
-        <li><a class="loginstuff future">My Planned Trips</a></li>
-        <li><a href="/">Plan New Trip</a></li>
-        <li><a class="login">Login</a></li>
-          <li><a class="logout">Logout</a></li>
-        </ul>
-    </div>
+  <div class="nav-wrapper">
+    <a href="#" class="brand-logo">Travel Book</a>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li><a class="loginstuff" href="/user">Search By User</a></li>
+      <li><a  class="loginstuff" href="/add">Add Post</a></li>
+      <li><a class="loginstuff saved">My Travel Book</a></li>
+      <li><a class="loginstuff future">My Planned Trips</a></li>
+      <li><a href="/">Plan New Trip</a></li>
+      <li><a class="login">Login</a></li>
+      <li><a class="logout">Logout</a></li>
+    </ul>
+  </div>
 </nav>
-
 <div class="container">
-    <div class="row">
-        <h1 class="names">Review</h1>
-      <form class="col s12" method="post" enctype="multipart/form-data" action="/add" id="newPost">
-          <div class="input-field col s12">
-            <input id="pac-input" class="controls" type="text" placeholder="Enter the place to review">
-          </div>
-          <div class="input-field col s12" >
-            <input name='name' id="place" placeholder="Place">
-          </div> 
-          <div class="input-field col s12" >
-            <input name='city' id="cityC" placeholder="City">
-          </div>  
-          <div class="input-field col s12">
-            <input name='country' id="countryC" placeholder="Country">
-          </div>  
-          <div class="input-field col s12" style="display: none">
-            <input name='user' id="user" placeholder="User">
-          </div> 
-
-  
-        <div class="input-field col s12">
-            <select name='category' id="category" required>
-              <option value="" disabled selected>Choose the category</option>
-              <option name='category' value="food">Food</option>
-              <option name='category' value="attractions">Attractions</option>
-              <option name='category' value="accommodations">Accomodation</option>
-            </select>
-            <label>Category</label>
-          </div>
-        <div class="input-field col s12">
-            <select name='rating' id="rating" required>
-              <option value="" disabled selected>Choose your rating</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
-            <label>Rating 1-5</label>
-          </div>
-          <div class="input-field col s12">
-              <select name='pricepoint' id="pricepoint" required>
-                <option value="" disabled selected>Price Point</option>
-                <option value="1">>$10 per person</option>
-                <option value="2">$10-20 per person</option>
-                <option value="3">>$20 per person</option>
-              </select>
-              <label>Indicate pricepoint</label>
-            </div>
-
-
-              <div class="input-field col s12">
-                <textarea name='review' id="review" class="materialize-textarea"></textarea>
-                <label for="textarea1">Enter your review</label>
-              </div>
-       
-              <div class="input-field col s12">
-                    <input id="upload" type="file" name="upl"/>    
-                    <input class="waves-effect waves-light btn" type="submit"/>
-              </div>
-
-      </form>
+  <div class="row">
+    <h1 class="names">Review</h1>
+    <form class="col s12" method="post" enctype="multipart/form-data" action="/add" id="newPost">
+      <div class="input-field col s12">
+        <input id="pac-input" class="controls" type="text" placeholder="Enter the place to review">
+      </div>    
+      <div class="input-field col s12" >
+        <label for="place"></label>
+        <input name='place' id="place" placeholder="Place" type="text" data-error=".errorTxt1">
+        <div class="errorTxt1" id="errormsg"></div>
+      </div>
+      <div class="input-field col s12" >
+        <label for="cityC"></label>
+        <input name='cityC' id="cityC" placeholder="City" type="text" data-error=".errorTxt2">
+        <div class="errorTxt2" id="errormsg"></div>
+      </div>
+      <div class="input-field col s12" >
+        <label for="countryC"></label>
+        <input name='countryC' id="countryC" placeholder="Place" type="text" data-error=".errorTxt3">
+        <div class="errorTxt3" id="errormsg"></div>
+      </div>
+      <div class="input-field col s12" style="display: none">
+        <input name='user' id="user" placeholder="User">
+      </div>     
+      <div class="input-field col s12">
+        <label for="category"></label>
+        <select name='category' id="category" data-error=".errorTxt4">
+          <option value="" disabled selected>Choose the category</option>
+          <option name='category' value="food">Food</option>
+          <option name='category' value="attractions">Attractions</option>
+          <option name='category' value="accommodations">Accomodation</option>
+        </select>
+        <div class="errorTxt4" id="errormsg"></div>
+      </div>
+      <div class="input-field col s12">
+        <label for="rating"></label>
+        <select name='rating' id="rating" data-error=".errorTxt5">
+          <option value="" disabled selected>Choose your rating</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+        <div class="errorTxt5" id="errormsg"></div>
+      </div>
+      <div class="input-field col s12">
+        <label for="pricepoint"></label>
+        <select name='pricepoint' id="pricepoint" data-error=".errorTxt6">
+          <option value="" disabled selected>Price Point</option>
+          <option value="1">>$10 per person</option>
+          <option value="2">$10-20 per person</option>
+          <option value="3">$20 per person</option>
+        </select>
+        <div class="errorTxt6" id="errormsg"></div>
+      </div>
+      <div class="input-field col s12">
+        <label for="textarea1">Enter your review</label>
+        <textarea name='review' id="review" class="materialize-textarea" type="text" data-error=".errorTxt7"></textarea>
+        <div class="errorTxt7" id="errormsg"></div>
+      </div>
       
-    </div>    
+      <div class="input-field col s12">
+        <input id="upload" type="file" "text" name="upl" data-error=".errorTxt8">
+        <div class="errorTxt8" id="errormsg"></div>
+        
+      </div>
+      <div class="input-field col s12">
+        <input class="waves-effect waves-light btn" type="submit">
+      </div>
+    </form>
+    
+  </div>
 </div>
 {{>login}}
