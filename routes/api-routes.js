@@ -1,4 +1,4 @@
-var amazonKeys = require("/keys.js");
+var amazonKeys = require("../keys.js");
 console.log(amazonKeys.secretAccessKey );
 var aws = require('aws-sdk'),
     multer = require('multer'),
