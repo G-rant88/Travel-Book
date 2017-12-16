@@ -153,7 +153,7 @@ app.get("/user", function(req, res) {
 
       var data = {
 
-        daty: results1
+        daty: results
 
       }
 
