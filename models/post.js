@@ -8,7 +8,9 @@ module.exports = function(sequelize, DataTypes) {
     categories: {type:DataTypes.STRING, allowNull:false},
     image: DataTypes.STRING,
     price: {type: DataTypes.INTEGER, defaultValue: 2, len: [1,3]},
-    rating: {type: DataTypes.INTEGER, defaultValue: 3, len: [1,5]}
+    rating: {type: DataTypes.INTEGER, defaultValue: 3, len: [1,5]},
+    past: DataTypes.STRING,
+    future: DataTypes.STRING
     
   });
 
