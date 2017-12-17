@@ -158,39 +158,20 @@ module.exports = function(app) {
 
   app.get("/saved/:user", function(req, res) {
 
-    var user = req.params.user
-
     db.user.findAll({
-
       where: {
-        username: user
-      }
+        username: req.params.user
+      },
+      include: [db.post]
     }).then(function(results) {
 
-      console.log(results[0].dataValues.id);
+      var userPost = {
+        data: results[0].dataValues.posts
+      }
 
-      db.post.findAll({
-
-        where: {
-
-          userid: results[0].dataValues.id
-        },
-        include: [db.user]
-
-      }).then(function(postResults) {
-
-        console.log(postResults[0].dataValues)
-        var test = {
-          data: postResults
-        }
-
-        console.log(test.data[0].dataValues.name)
-        res.render('travelBooks', {
-          test
-        });
-
+      res.render('travelBooks', {
+        userPost
       });
-
 
     });
 
