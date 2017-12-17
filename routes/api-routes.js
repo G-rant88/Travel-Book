@@ -179,101 +179,86 @@ module.exports = function(app) {
 
   app.get("/future/:user", function(req, res) {
 
-    var user = req.params.user
+    var username = req.params.user
 
-    db.user.findAll({
+    db.favorite.findAll({
 
       where: {
-        username: user
+        user: username
       }
     }).then(function(results) {
 
-      console.log(results[0].dataValues.future);
-      var futures = results[0].dataValues.future;
+      var data = {
 
-      db.post.findAll({
+        daty: results
 
-        where: {
+      }
 
-          future: futures
-        },
-        include: [db.user]
-
-      }).then(function(results2) {
-
-        var data = {
-
-          daty: results2,
-          dat: results2
-        }
-
-        console.log(data.daty);
+      console.log(data);
+     
         res.render('futureTrips', {
           data
         });
       });
 
     });
-  });
-
-  app.post("/add/newtrip", function(req, res) {
-
-    console.log(req.body);
-    console.log(req.body.name);
-    console.log(req.body.results);
-    var ids = JSON.parse(req.body.results[1])
-
-    db.user.update({
-
-      future: req.body.name
-    }, {
-      where: {
-        username: req.body.user
-      }
-    })
-
-    db.post.update({
-
-      future: req.body.name
-    }, {
-      where: {
-        id: ids
-      }
-    })
 
 
-    res.end();
-  });
-
-  app.post("/add/previoustrip", function(req, res) {
+  app.post("/favorite", function(req, res) {
 
     console.log(req.body);
-    console.log(req.body.name);
-    console.log(req.body.results);
+  
 
-    var ids = JSON.parse(req.body.results[0])
+    db.favorite.create({
 
-    db.user.update({
+      user: req.body.user,
+      country: req.body.country,
+      city: req.body.city,
+      place: req.body.place,
+      price: req.body.price,
+      rating: req.body.rating,
+      category: req.body.category,
+      review: req.body.review,
+      image: req.body.image
 
-      past: req.body.name
-    }, {
-      where: {
-        username: req.body.user
-      }
+
+    }).then(function(results){
+
+res.end();
+
     })
-
-    db.post.update({
-
-      past: req.body.name
-    }, {
-      where: {
-        id: ids
-      }
-    })
-
-
-    res.end();
   });
+
+
+  // app.post("/add/previoustrip", function(req, res) {
+
+  //   console.log(req.body);
+  //   console.log(req.body.name);
+  //   console.log(req.body.results);
+
+  //   var ids = JSON.parse(req.body.results[0])
+
+  //   db.user.update({
+
+  //     past: req.body.name
+  //   }, {
+  //     where: {
+  //       username: req.body.user
+  //     }
+  //   })
+
+  //   db.post.update({
+
+  //     past: req.body.name
+  //   }, {
+  //     where: {
+  //       id: ids
+  //     }
+  //   })
+
+
+  //   res.end();
+  // });
 
 
 };

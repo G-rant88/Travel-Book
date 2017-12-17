@@ -3,8 +3,6 @@ module.exports = function(sequelize, DataTypes) {
     
     username: {type:DataTypes.STRING, allowNull:false},
     password: {type:DataTypes.STRING, allowNull:false},
-    past: DataTypes.STRING,
-    future: DataTypes.STRING
   });
 
 user.associate = function(models) {
