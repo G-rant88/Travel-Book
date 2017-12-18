@@ -41,7 +41,7 @@ $(function () {
                 }
             }
             var resultItem = 'Name: ' + resultInfo.name + '<br>' + 'Price: ' + dollarSigns + '<br>' + 'Rating: ' + stars + '<br>' + 'Category: ' + resultInfo.categories + '<br>';
-            $('#slide-out').append('<li  class="future" data-post-id="' + resultInfo.id + '">' + resultItem + '</li><hr>');
+            $('#slide-out').append('<li  class="previous" data-post-id="' + resultInfo.id + '">' + resultItem + '</li><hr>');
         }
         // change result from liked to unlike
         // removes item from liked list
