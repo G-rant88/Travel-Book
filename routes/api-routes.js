@@ -250,9 +250,13 @@ db.trip.create({
       },
     }).then(function(results) {
 
+      // console.log(results[0].dataValues);
+
       var userPost = {
-        data: results[0].dataValues.posts
+        data: results[0].dataValues
       }
+
+       console.log(userPost);
 
       res.render('updatePost', {
         userPost
@@ -282,5 +286,26 @@ db.trip.create({
     res.end();
 
   });
+
+    app.delete("/delpost", function(req, res) {
+
+
+    console.log(req.body.id);
+
+    var ids = JSON.parse(req.body.id);
+
+    db.post.destroy({
+
+      where:{
+
+        id: ids
+      }
+
+    })
+
+    res.end();
+
+  });
+
 
 };
