@@ -42,3 +42,10 @@
   });
 
 });
+
+      $('.back').click(function (event) {
+
+
+        location.assign("/user");
+
+      });

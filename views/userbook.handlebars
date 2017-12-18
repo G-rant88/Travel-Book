@@ -1,0 +1,59 @@
+<nav>
+    <div class="nav-wrapper">
+        <a href="#" class="brand-logo">Travel Book</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a class="loginstuff" href="/user">Users</a></li>
+            <li><a  class="loginstuff" href="/add">Add Post</a></li>
+    <li><a class="loginstuff saved">My Posts</a></li>
+        <li><a class="loginstuff future">My Travel Book</a></li>
+        <li><a href="/">Plan New Trip</a></li>
+        <li><a class="login">Login</a></li>
+          <li><a class="logout">Logout</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    {{!-- page title --}}
+
+    <div class="col s12 center-align">
+        <h3>{{data.user}}'s Travel Book!</h3>
+    </div>
+    {{#each data.daty}}
+    <div class="row">
+    <div class="col s12 m4 left-align left">
+
+    <h4>Trip: {{tripName}}</h4>
+    </div>
+    </div>
+
+    <div class="row">
+         <div class="col s4 m4 center-align">
+          <div class="card blue-grey darken-1">
+            <div class="card-content white-text">
+              <span class="card-title">Country: {{post.country}}</span>
+              <span class="card-title">City: {{post.city}}</span>
+              <span class="card-title">Place: {{post.name}}</span>
+              <img src=https://s3-us-west-2.amazonaws.com/travelbookpictures/{{post.image}} width="100%">
+              <p>Review: {{post.review}}</p>
+              <p><span class="rating">Rating: {{post.rating}}</span></p>
+              <p>Price: {{post.price}}</p>
+              <p>Category: {{post.categories}}</p>
+             <!--  <p>Written By: {{username}}</p> -->
+            </div>
+          
+
+          </div>
+          
+      </div>
+{{/each}}
+      
+</div>
+        <div class="row center-align">
+    <div class="col s12">
+        <button class="waves-effect waves-light btn back">Back</button>
+      </div>
+</div>
+
+
+{{>login}}

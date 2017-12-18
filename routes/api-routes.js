@@ -308,4 +308,64 @@ db.trip.create({
   });
 
 
+  app.get("/posts/:user", function(req, res) {
+
+    var username = req.params.user
+
+    db.user.findAll({
+      where: {
+        username: req.params.user
+      },
+      include: [db.post]
+    }).then(function(results) {
+
+    
+
+      var userPost = {
+        data: results[0].dataValues.posts,
+        user: username
+      }
+
+        // console.log(results[0].username);
+        // console.log(userPost.user);
+
+      res.render('userposts', {
+        userPost
+      });
+
+    });
+
+  });
+
+  app.get("/book/:user", function(req, res) {
+
+    var username = req.params.user
+
+    db.trip.findAll({
+
+      where: {
+        user: username
+      },
+      include: [db.post]
+
+    }).then(function(results) {
+
+      var data = {
+
+        daty: results,
+        user: username
+
+      }
+
+      // console.log(data);
+      console.log(data.daty[0]);
+     
+        res.render('userbook', {
+          data
+        });
+      });
+
+    });
+
+
 };
