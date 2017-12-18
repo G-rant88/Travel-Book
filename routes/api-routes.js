@@ -216,7 +216,7 @@ module.exports = function(app) {
 
 
 
-for (var i = 0; i < JSON.parse(req.body.results[i]).length; i++) {
+for (var i = 0; i < req.body.results.length; i++) {
   
 var posts = JSON.parse(req.body.results[i]);
 
