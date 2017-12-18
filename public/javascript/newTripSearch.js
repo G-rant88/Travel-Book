@@ -194,7 +194,7 @@ $(function() {
             var url = '/search/' + searchQuery.country + '/' + searchQuery.city + '/' + searchQuery.categories.join('+');
         
             // console.log(searchQuery);
-             console.log(url);
+            console.log(url);
             location.assign(url);
             // redirect user to result page
         //     $.ajax({

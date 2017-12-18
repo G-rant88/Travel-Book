@@ -49,6 +49,21 @@
           </div>
           
       </div>
+    
+    <ul class="collapsible" data-collapsible="accordion">
+    {{!-- each list item is a separate trip; opening that trip displays all the amenities  --}}
+    <li>
+      {{!-- insert trip information partial in here --}}
+      <div class="collapsible-header"><i class="material-icons">filter_drama</i>Trip Name 1</div>
+      <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+      {{!-- {{>tripInfo}} --}}
+    </li>
+    <li>
+      <div class="collapsible-header"><i class="material-icons">place</i>Trip Name 2</div>
+      <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+    </li>
+  </ul>
+
 {{/each}}
       
 </div>

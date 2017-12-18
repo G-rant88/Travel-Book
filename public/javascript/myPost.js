@@ -30,7 +30,7 @@
       id: ids
     }
 
-     $.ajax("/delpost", {
+     $.ajax("/deltrip", {
       type: "DELETE",
       data: datas
     }).then(
@@ -42,10 +42,3 @@
   });
 
 });
-
-      $('.back').click(function (event) {
-
-
-        location.assign("/user");
-
-      });

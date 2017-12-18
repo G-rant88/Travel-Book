@@ -186,22 +186,55 @@ module.exports = function(app) {
       where: {
         user: username
       },
-      include: [db.post]
+      // include: [db.post]
 
     }).then(function(results) {
+      //console.log(results[0].postIds.split(', '));
 
       var data = {
-
+        // results is an array of all trips from user
         daty: results
-
       }
 
-      // console.log(data);
-      console.log(data.daty[0]);
-     
-        res.render('futureTrips', {
-          data
+      for (var i=0; i < results.length; i++) {
+        // convert string to array for postids
+        results[i].postIds = results[i].postIds.split(', ');
+      }
+
+      // console.log(results[0].postIds);
+
+      // run this function through each postIds list
+      function findPost (postId) {
+        var postIdInt = parseInt(postId);
+        return db.post.findOne({
+          where: {
+            id: postIdInt
+          }
         });
+      }
+
+      for (var i=0; i < results.length; i++) {
+        var postInfo = [];
+        // array of postids per trip
+        var postIds = results[i].postIds;
+        // console.log(postIds);
+        var nestResult = results[i];
+        for (var j=0; j < postIds.length; j++) {
+          findPost(postIds[j]).then(function (result) {
+            console.log(result);
+            console.log('=========');
+            postInfo.push(result);
+            data[nestResult.tripName] = postInfo;
+            console.log("229" + JSON.stringify(data[nestResult.tripName]));
+            
+          });
+        }   
+      }
+
+      res.render('futureTrips', {
+        data
+      });
+
       });
 
     });
@@ -215,30 +248,16 @@ module.exports = function(app) {
     console.log(req.body.user);
 
 
+    db.trip.create({
 
-for (var i = 0; i < req.body.results.length; i++) {
-  
-var posts = JSON.parse(req.body.results[i]);
+      tripName: req.body.trip,
+      user: req.body.user,
+      postIds: req.body.results
 
-console.log(req.body.results[i]);
-
-console.log(posts);
-
-db.trip.create({
-
-  tripName: req.body.trip,
-  user: req.body.user,
-  postId: posts
-
-})
-.then(function(results2){
-
- 
-})
-
-}
-
- res.end();
+    })
+    .then(function(results2){
+      res.end();
+    })
 
 });
 
@@ -250,13 +269,9 @@ db.trip.create({
       },
     }).then(function(results) {
 
-      // console.log(results[0].dataValues);
-
       var userPost = {
-        data: results[0].dataValues
+        data: results[0].dataValues.posts
       }
-
-       console.log(userPost);
 
       res.render('updatePost', {
         userPost
@@ -286,86 +301,5 @@ db.trip.create({
     res.end();
 
   });
-
-    app.delete("/delpost", function(req, res) {
-
-
-    console.log(req.body.id);
-
-    var ids = JSON.parse(req.body.id);
-
-    db.post.destroy({
-
-      where:{
-
-        id: ids
-      }
-
-    })
-
-    res.end();
-
-  });
-
-
-  app.get("/posts/:user", function(req, res) {
-
-    var username = req.params.user
-
-    db.user.findAll({
-      where: {
-        username: req.params.user
-      },
-      include: [db.post]
-    }).then(function(results) {
-
-    
-
-      var userPost = {
-        data: results[0].dataValues.posts,
-        user: username
-      }
-
-        // console.log(results[0].username);
-        // console.log(userPost.user);
-
-      res.render('userposts', {
-        userPost
-      });
-
-    });
-
-  });
-
-  app.get("/book/:user", function(req, res) {
-
-    var username = req.params.user
-
-    db.trip.findAll({
-
-      where: {
-        user: username
-      },
-      include: [db.post]
-
-    }).then(function(results) {
-
-      var data = {
-
-        daty: results,
-        user: username
-
-      }
-
-      // console.log(data);
-      console.log(data.daty[0]);
-     
-        res.render('userbook', {
-          data
-        });
-      });
-
-    });
-
 
 };
