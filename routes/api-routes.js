@@ -181,11 +181,13 @@ module.exports = function(app) {
 
     var username = req.params.user
 
-    db.favorite.findAll({
+    db.trip.findAll({
 
       where: {
         user: username
-      }
+      },
+      include: [db.post]
+
     }).then(function(results) {
 
       var data = {
@@ -204,61 +206,51 @@ module.exports = function(app) {
     });
 
 
-  app.post("/favorite", function(req, res) {
+ app.post("/add/trip", function(req, res) {
 
     console.log(req.body);
+
+for (var i = 0; i < req.body[i].length; i++) {
   
+var post = JSON.parse(req.body.results[i]);
 
-    db.favorite.create({
+db.trip.create({
 
-      user: req.body.user,
-      country: req.body.country,
-      city: req.body.city,
-      place: req.body.place,
-      price: req.body.price,
-      rating: req.body.rating,
-      category: req.body.category,
-      review: req.body.review,
-      image: req.body.image
+  tripName: req.body.trip,
+  user: req.body.user,
+  postId: post
 
+})
+.then(function(results){
 
-    }).then(function(results){
+ 
+})
 
-res.end();
+}
 
-    })
+ res.end();
+
+});
+
+  app.get("/edit/:user", function(req, res) {
+
+    db.user.findAll({
+      where: {
+        username: req.params.user
+      },
+      include: [db.post]
+    }).then(function(results) {
+
+      var userPost = {
+        data: results[0].dataValues.posts
+      }
+
+      res.render('updatePost', {
+        userPost
+      });
+
+    });
+
   });
-
-
-  // app.post("/add/previoustrip", function(req, res) {
-
-  //   console.log(req.body);
-  //   console.log(req.body.name);
-  //   console.log(req.body.results);
-
-  //   var ids = JSON.parse(req.body.results[0])
-
-  //   db.user.update({
-
-  //     past: req.body.name
-  //   }, {
-  //     where: {
-  //       username: req.body.user
-  //     }
-  //   })
-
-  //   db.post.update({
-
-  //     past: req.body.name
-  //   }, {
-  //     where: {
-  //       id: ids
-  //     }
-  //   })
-
-
-  //   res.end();
-  // });
-
 
 };
