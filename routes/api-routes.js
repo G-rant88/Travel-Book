@@ -1,12 +1,10 @@
-var amazonKeys = require("../key.js");
-console.log(amazonKeys.secretAccessKey);
 var aws = require('aws-sdk'),
   multer = require('multer'),
   multerS3 = require('multer-s3');
 
 aws.config.update({
-  secretAccessKey: process.env.S3_SECRET_KEY || amazonKeys.secretAccessKey,
-  accessKeyId: process.env.S3_ACCESS_KEY || amazonKeys.accessKeyId,
+  secretAccessKey: process.env.S3_SECRET_KEY || require("../key.js").secretAccessKey,
+  accessKeyId: process.env.S3_ACCESS_KEY || require("../key.js").accessKeyId,
   region: 'us-west-1'
 });
 
@@ -256,11 +254,11 @@ db.trip.create({
         data: results[0].dataValues
       }
 
-       console.log(userPost);
+       // console.log(userPost);
 
-      res.render('updatePost', {
+      res.render('updatePost', 
         userPost
-      });
+      );
 
     });
 
@@ -306,6 +304,36 @@ db.trip.create({
     res.end();
 
   });
+
+  app.put("/update/:id", function(req, res) {
+
+    console.log(req.body)
+
+    db.post.update({
+      name: req.body.name,
+      city: req.body.city,
+      country: req.body.country,
+      categories: req.body.categories,
+      rating: req.body.rating,
+      price: req.body.price,
+      review: req.body.review
+    }, {
+      where: {
+        id: parseInt(req.body.id)
+      }
+    }).then(function(data) {
+      res.end();
+    })
+  });
+
+
+
+
+
+
+
+
+
 
 
   app.get("/posts/:user", function(req, res) {
