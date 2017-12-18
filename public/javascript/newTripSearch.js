@@ -227,6 +227,9 @@ $( document ).ready(function() {
         $(".login").show();
         $(".logout").hide();
         $(".loginstuff").hide();
+        $(".card-action").hide();
+        $(".fixed-action-btn").hide();
+
         return false;
     }
 
@@ -234,6 +237,8 @@ $( document ).ready(function() {
     $(".logout").show();
     $(".login").hide();
       $(".loginstuff").show();
+        $(".card-action").show();
+        $(".fixed-action-btn").show();
 
 $(".names").prepend(cook+"'s ")
 

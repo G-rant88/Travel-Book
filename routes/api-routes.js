@@ -209,22 +209,29 @@ module.exports = function(app) {
 
  app.post("/add/trip", function(req, res) {
 
-console.log(req.body);
+
     console.log(req.body.results);
+    console.log(req.body.trip);
+    console.log(req.body.user);
+
 
 
 for (var i = 0; i < JSON.parse(req.body.results[i]).length; i++) {
   
-var post = JSON.parse(req.body.results[i]);
+var posts = JSON.parse(req.body.results[i]);
+
+console.log(req.body.results[i]);
+
+console.log(posts);
 
 db.trip.create({
 
   tripName: req.body.trip,
   user: req.body.user,
-  postId: post
+  postId: posts
 
 })
-.then(function(results){
+.then(function(results2){
 
  
 })
