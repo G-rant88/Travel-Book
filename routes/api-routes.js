@@ -196,7 +196,8 @@ module.exports = function(app) {
 
       }
 
-      console.log(data);
+      // console.log(data);
+      console.log(data.daty[0]);
      
         res.render('futureTrips', {
           data
@@ -208,9 +209,11 @@ module.exports = function(app) {
 
  app.post("/add/trip", function(req, res) {
 
-    console.log(req.body);
+console.log(req.body);
+    console.log(req.body.results);
 
-for (var i = 0; i < req.body[i].length; i++) {
+
+for (var i = 0; i < JSON.parse(req.body.results[i]).length; i++) {
   
 var post = JSON.parse(req.body.results[i]);
 
@@ -250,6 +253,27 @@ db.trip.create({
       });
 
     });
+
+  });
+
+
+  app.delete("/deltrip", function(req, res) {
+
+
+    console.log(req.body.id);
+
+    var id = JSON.parse(req.body.id);
+
+    db.trip.destroy({
+
+      where:{
+
+        postId: id
+      }
+
+    })
+
+    res.end();
 
   });
 
