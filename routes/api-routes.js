@@ -242,13 +242,12 @@ db.trip.create({
 
 });
 
-  app.get("/edit/:user", function(req, res) {
+  app.get("/edit/:user/:id", function(req, res) {
 
-    db.user.findAll({
+    db.post.findAll({
       where: {
-        username: req.params.user
+        id: req.params.id
       },
-      include: [db.post]
     }).then(function(results) {
 
       var userPost = {
