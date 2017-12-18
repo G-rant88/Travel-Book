@@ -104,6 +104,7 @@ $(function () {
  $('.edit-btn').click(function (event) {
 
     var cook = Cookies.get('name');
-    location.assign("/edit/"+cook);
+    var ids = $(this).attr("data-post-id");
+    location.assign("/edit/"+cook+"/"+ids);
 
 });
