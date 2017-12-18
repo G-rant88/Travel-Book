@@ -2,7 +2,7 @@
     <div class="nav-wrapper">
     <a href="#" class="brand-logo">Travel Book</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-         <li><a class="loginstuff" href="/user">Users</a></li>
+         <li><a class="loginstuff friendPage">Friends</a></li>
         <li><a  class="loginstuff" href="/add">Add Post</a></li>
         <li><a class="loginstuff saved">My Posts</a></li>
        <li><a class="loginstuff future">My Travel Book</a></li>
@@ -18,30 +18,40 @@
     <div class="row center-align">
 
      
-          <h1>Users</h1>
+          <h3 class="names"> Friends</h3>
+            <a class='dropdown-button btn material-icons left' href='#' data-activates='dropdown1'><i class="material-icons left">add</i>Add Friend</a>
+
+  <!-- Dropdown Structure -->
+  <ul id='dropdown1' class='dropdown-content'>
+    {{#each data.names}}
+    <li><a type="button" class="addFriend" data-id="{{username}}">{{username}}</a></li>
+     {{/each}}
+  </ul>
           <table class="table table-striped">
             <thead>
               <tr>
-                
                 <th>Name:</th>
-                <th># of Posts:</th>
-                <th>See User's Posts</th>
-                <th>See User's Travel Book</th>
+                <th>See Friends's Posts</th>
+                <th>See Friends's Travel Book</th>
               </tr>
             </thead>
             <tbody>
               <tr id="form-row">
                 <form id="author-form">
                  {{#each data.daty}}
-                  <td> {{username}}</td>
-                  <td>#</td>
-                  <td><a href="/posts/{{username}}">{{username}}'s Posts</a></td>
-                  <td><a href="/book/{{username}}">{{username}}'s Travel Book</a></td>
+                 {{#if name}}
+                  <td>{{name}}</td>
+                
+                  <td><a href="/posts/{{name}}">{{name}}'s Posts</a></td>
+                  <td><a href="/book/{{name}}">{{name}}'s Travel Book</a></td>
+                  <td><a data-id="{{name}}" class="waves-effect waves-light btn delfriend"><i class="material-icons left">clear</i>Remove Friend</a></td>
                   </tr>
-                  {{/each}}
+                  {{/if}}
+                 {{/each}}
                 </form>
               
             </tbody>
+
           </table>
      
       </div>

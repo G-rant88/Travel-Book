@@ -45,7 +45,8 @@
 
       $('.back').click(function (event) {
 
+        var cook = Cookies.get('name');
 
-        location.assign("/user");
+        location.assign("/friends/"+cook);
 
       });
