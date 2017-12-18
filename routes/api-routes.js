@@ -319,7 +319,7 @@ db.trip.create({
       review: req.body.review
     }, {
       where: {
-        id: parseInt(req.body.id)
+        id: parseInt(req.params.id)
       }
     }).then(function(data) {
       res.end();
