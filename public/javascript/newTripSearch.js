@@ -15,7 +15,6 @@ $(function() {
         "type": "map",
         "theme": "light",
         "projection": "miller",
-
         "dataProvider": {
             "map": "worldLow",
             "getAreasFromMap": true
@@ -85,7 +84,7 @@ $(function() {
                 $('#cities').append(city);
             }
             // show cities dropdown newly populated with cities
-            $('.cities').show();           
+            $('.cities').show();
             $('#cities').material_select();
 
         });
@@ -102,7 +101,7 @@ $(function() {
             var city = $('#cities option:selected').val();
             searchQuery.city = city;
             // show categories
-            $('.categories').show();                       
+            $('.categories').show();
             $('#categories').material_select();
         }
     }
@@ -176,4 +175,3 @@ $(".future").on("click", function(event) {
     location.assign("/future/" + cook);
 
 });
-

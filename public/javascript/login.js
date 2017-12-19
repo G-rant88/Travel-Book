@@ -1,12 +1,11 @@
-
 $(".login").on("click", function(event) {
 
 
 
- $("#modal1").modal();
-          $("#modal1").modal('open');
+  $("#modal1").modal();
+  $("#modal1").modal('open');
 
-      });
+});
 
 $("#logs").on("click", function(event) {
 
@@ -51,18 +50,18 @@ $("#logs").on("click", function(event) {
 
             info: userid
           }
-       
-         
-           $.ajax("/loggedin", {
-           type: "PUT",
-           data: infos
+
+
+          $.ajax("/loggedin", {
+            type: "PUT",
+            data: infos
           }).then(function(data) {
 
             var cook = Cookies.set('name');
 
-          $("#modal1").modal('close');
-          location.reload();
-              });
+            $("#modal1").modal('close');
+            location.reload();
+          });
         }
       }
 
@@ -125,8 +124,8 @@ $("#sign").on("click", function(event) {
         data: info
       }).then(
         function() {
-       $("#print").html("Thanks for creating an account!<br>Please Login with your username and password.");
-  
+          $("#print").html("Thanks for creating an account!<br>Please Login with your username and password.");
+
         }
       );
     });

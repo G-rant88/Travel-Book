@@ -16,12 +16,12 @@ $('#updatePost').click(function(event) {
 	var user = Cookies.get('name');
 
 	var updatePost = {
-		name: $("#place").val() ,
+		name: $("#place").val(),
 		city: $("#cityC").val(),
 		country: $("#countryC").val(),
-		categories: $("#categories").val() ,
+		categories: $("#categories").val(),
 		rating: $("#rate").val(),
-		price: $("#pricep").val() ,
+		price: $("#pricep").val(),
 		review: $("#review").val()
 	}
 	console.log(updatePost);

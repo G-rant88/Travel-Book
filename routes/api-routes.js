@@ -105,7 +105,7 @@ module.exports = function(app) {
 
         console.log(results.dataValues);
 
-        res.redirect("/saved/"+user);
+        res.redirect("/saved/" + user);
       });
 
     });
@@ -153,20 +153,20 @@ module.exports = function(app) {
 
         db.user.findAll({})
 
-        .then(function(res2) {
-          
-          var data = {
+          .then(function(res2) {
 
-            names: res2
+            var data = {
 
-          }
-          // console.log(data);
+              names: res2
 
-          res.render("userSearch", {
-            data
-          })
+            }
+            // console.log(data);
 
-        });
+            res.render("userSearch", {
+              data
+            })
+
+          });
       }
 
       var friendsList = friends.split(",");
@@ -183,29 +183,29 @@ module.exports = function(app) {
 
       });
 
-      
+
       db.user.findAll({
-        where: {
-          username: {
-            $notIn: availableFriends
+          where: {
+            username: {
+              $notIn: availableFriends
+            }
           }
-        }
-      })
-
-      .then(function(res2) {
-
-
-        var data = {
-
-          daty: friends,
-          names: res2
-
-        }
-
-        res.render("userSearch", {
-          data
         })
-      })
+
+        .then(function(res2) {
+
+
+          var data = {
+
+            daty: friends,
+            names: res2
+
+          }
+
+          res.render("userSearch", {
+            data
+          })
+        })
 
     })
 
@@ -235,19 +235,19 @@ module.exports = function(app) {
   });
 
   var Promise = require("bluebird");
-  
-  app.get('/future/:user/:trip', function (req, res) {
+
+  app.get('/future/:user/:trip', function(req, res) {
     var username = req.params.user;
     var tripName = req.params.trip;
-  
+
 
     db.trip.findOne({
-      
+
       where: {
         tripName: tripName
       }
 
-    }).then(function(results){
+    }).then(function(results) {
 
       var postIds = results.postIds.split(', ');
       var postInfo = [];
@@ -255,17 +255,17 @@ module.exports = function(app) {
         tripPosts: null
       };
 
-      Promise.map(postIds, function (postId) {
+      Promise.map(postIds, function(postId) {
         var postIdInt = parseInt(postId);
         return db.post.findOne({
           where: {
             id: postIdInt
           }
-        }).then(function (result) {
+        }).then(function(result) {
           postInfo.push(result);
-          data.tripPosts = postInfo;         
+          data.tripPosts = postInfo;
         });
-      }).then(function () {
+      }).then(function() {
         res.send(data);
       });
 
@@ -302,18 +302,18 @@ module.exports = function(app) {
 
   app.post("/add/trip", function(req, res) {
 
-    
 
-      db.trip.create({
 
-      tripName: req.body.trip,
-      user: req.body.user,
-      postIds: req.body.results
+    db.trip.create({
 
-    })
-    .then(function(results2){
-      res.end();
-    })
+        tripName: req.body.trip,
+        user: req.body.user,
+        postIds: req.body.results
+
+      })
+      .then(function(results2) {
+        res.end();
+      })
 
   });
 
@@ -324,7 +324,7 @@ module.exports = function(app) {
         id: req.params.id
       },
     }).then(function(results) {
-     
+
       var userPost = {
         data: results[0].dataValues
       }
@@ -571,7 +571,7 @@ module.exports = function(app) {
   app.post("/update/trip", function(req, res) {
 
     console.log(req.body.trip);
-     console.log(req.body.user);
+    console.log(req.body.user);
 
     db.trip.findAll({
 
@@ -580,7 +580,7 @@ module.exports = function(app) {
         user: req.body.user,
         tripName: req.body.trip
       }
-    }).then(function(results){
+    }).then(function(results) {
 
       console.log(results[0]);
 
@@ -605,30 +605,30 @@ module.exports = function(app) {
       db.trip.update({
 
         postIds: newList
-},{
+      }, {
 
-      where:{
+        where: {
 
-        user: req.body.user,
-        tripName: req.body.trip
-      }
-});
+          user: req.body.user,
+          tripName: req.body.trip
+        }
+      });
 
-    res.end();
+      res.end();
+    });
+
   });
-
-});
 
 
   app.get("/get/trip", function(req, res) {
 
-     db.trip.findAll({}).then(function(results){
+    db.trip.findAll({}).then(function(results) {
 
-res.json(results);
+      res.json(results);
 
 
-     });
+    });
 
-});
+  });
 
 };

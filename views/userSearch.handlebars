@@ -1,63 +1,54 @@
 <nav>
-    <div class="nav-wrapper">
+  <div class="nav-wrapper">
     <a href="/" class="brand-logo">travelBook</a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-         <li><a class="loginstuff friendPage">Friends</a></li>
-        <li><a  class="loginstuff" href="/add">Add Post</a></li>
-        <li><a class="loginstuff saved">My Posts</a></li>
-       <li><a class="loginstuff future">My Travel Book</a></li>
-        <li><a href="/">Plan New Trip</a></li>
-        <li><a class="login">Login</a></li>
-          <li><a class="logout">Logout</a></li>
-        </ul>
-    </div>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li><a class="loginstuff friendPage">Friends</a></li>
+      <li><a  class="loginstuff" href="/add">Add Post</a></li>
+      <li><a class="loginstuff saved">My Posts</a></li>
+      <li><a class="loginstuff future">My Travel Book</a></li>
+      <li><a href="/">Plan New Trip</a></li>
+      <li><a class="login">Login</a></li>
+      <li><a class="logout">Logout</a></li>
+    </ul>
+  </div>
 </nav>
-
 <div class="container">
-    {{!-- page title --}}
-    <div class="row center-align">
-
-     
-          <h3 class="names"> Friends</h3>
-            <a class='dropdown-button btn material-icons left add-friend' href='#' data-activates='dropdown1'><i class="material-icons left">add</i>Add Friend</a>
-
-  <!-- Dropdown Structure -->
-  <ul id='dropdown1' class='dropdown-content'>
-    {{#each data.names}}
-    <li><a type="button" class="addFriend" data-id="{{username}}">{{username}}</a></li>
-     {{/each}}
-  </ul>
-          <table class="table table-striped">
-            <thead>
-              <tr>
-                <th>Name:</th>
-                <th>See Friend's Posts</th>
-                <th>See Friend's Travel Book</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr id="form-row">
-                <form id="author-form">
-                 {{#each data.daty}}
-                 {{#if name}}
-                  <td>{{name}}</td>
-                
-                  <td><a href="/posts/{{name}}">{{name}}'s Posts</a></td>
-                  <td><a href="/book/{{name}}">{{name}}'s Travel Book</a></td>
-                  <td><a data-id="{{name}}" class="waves-effect waves-light btn delfriend"><i class="material-icons left">clear</i>Remove Friend</a></td>
-
-                  </tr>
-                  {{/if}}
-                 {{/each}}
-                </form>
-              
-            </tbody>
-
-          </table>
-     
-      </div>
+  {{!-- page title --}}
+  <div class="row center-align">
     
+    <h3 class="names"> Friends</h3>
+    <a class='dropdown-button btn material-icons left add-friend' href='#' data-activates='dropdown1'><i class="material-icons left">add</i>Add Friend</a>
+    <!-- Dropdown Structure -->
+    <ul id='dropdown1' class='dropdown-content'>
+      {{#each data.names}}
+      <li><a type="button" class="addFriend" data-id="{{username}}">{{username}}</a></li>
+      {{/each}}
+    </ul>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Name:</th>
+          <th>See Friend's Posts</th>
+          <th>See Friend's Travel Book</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr id="form-row">
+          <form id="author-form">
+            {{#each data.daty}}
+            {{#if name}}
+            <td>{{name}}</td>
+            
+            <td><a href="/posts/{{name}}">{{name}}'s Posts</a></td>
+            <td><a href="/book/{{name}}">{{name}}'s Travel Book</a></td>
+            <td><a data-id="{{name}}" class="waves-effect waves-light btn delfriend"><i class="material-icons left">clear</i>Remove Friend</a></td>
+          </tr>
+          {{/if}}
+          {{/each}}
+        </form>
+      </tbody>
+    </table>
+  </div>
 </div>
-<!-- <script src="js/author.js" type="text/javascript"></script> -->
 
 {{>login}}

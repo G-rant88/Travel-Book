@@ -1,16 +1,15 @@
 <!-- topnav -->
-
 <nav>
     <div class="nav-wrapper">
-    <a href="/" class="brand-logo">travelBook</a>
+        <a href="/" class="brand-logo">travelBook</a>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
-                 <li><a class="loginstuff friendPage">Friends</a></li>
-            <li><a  class="loginstuff" href="/add">Add Post</a></li>
-         <li><a class="loginstuff saved">My Posts</a></li>
-       <li><a class="loginstuff future">My Travel Book</a></li>
-        <li><a href="/">Plan New Trip</a></li>
-        <li><a class="login">Login</a></li>
-        <li><a class="logout">Logout</a></li>
+            <li><a class="loginstuff friendPage">Friends</a></li>
+            <li><a class="loginstuff" href="/add">Add Post</a></li>
+            <li><a class="loginstuff saved">My Posts</a></li>
+            <li><a class="loginstuff future">My Travel Book</a></li>
+            <li><a href="/">Plan New Trip</a></li>
+            <li><a class="login">Login</a></li>
+            <li><a class="logout">Logout</a></li>
         </ul>
     </div>
 </nav>
@@ -23,8 +22,8 @@
     </div>
     {{!-- map --}}
     <div class="col s12 center-align">
-        <div id="chartdiv"></div> 
-    </div> 
+        <div id="chartdiv"></div>
+    </div>
     {{!-- dropdown options for cities --}}
     <div class="input-field col s12 cities">
         <select id="cities">
@@ -33,10 +32,10 @@
     {{!-- dropdown options for amenities -- can pick multiple --}}
     <div class="input-field col s12 categories">
         <select id="categories">
-        <option value="" disabled selected>Choose amenities you'd like to search</option>
-        <option value="attractions">Attractions</option>
-        <option value="accommodations">Accommodations</option>
-        <option value="food">Restaurants</option>
+            <option value="" disabled selected>Choose amenities you'd like to search</option>
+            <option value="attractions">Attractions</option>
+            <option value="accommodations">Accommodations</option>
+            <option value="food">Restaurants</option>
         </select>
     </div>
     {{!-- submit button --}}
@@ -45,5 +44,3 @@
     </div>
 </div>
 {{>login}}
-
-
