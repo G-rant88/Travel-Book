@@ -622,4 +622,16 @@ module.exports = function(app) {
 
 });
 
+
+  app.get("/get/trip", function(req, res) {
+
+     db.trip.findAll({}).then(function(results){
+
+res.json(results);
+
+
+     });
+
+});
+
 };
