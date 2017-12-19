@@ -83,7 +83,7 @@ module.exports = function(app) {
   });
 
   app.post("/add", upload.array('upl', 1), function(req, res) {
-
+    var user = req.body.user;
     db.user.findOne({
       where: {
         username: req.body.user
@@ -105,7 +105,7 @@ module.exports = function(app) {
 
         console.log(results.dataValues);
 
-        res.redirect("/");
+        res.redirect("/saved/"+user);
       });
 
     });
@@ -138,79 +138,78 @@ module.exports = function(app) {
 
     db.user.findAll({
 
-      where:{
+      where: {
 
         username: req.params.user
       },
       include: [db.post]
 
-    }).then(function(results){
-
-console.log(results[0]);
+    }).then(function(results) {
 
       var friends = results[0].friends;
 
 
-      if (friends === null){
+      if (friends === null) {
 
- db.user.findAll({})
+        db.user.findAll({})
 
- .then(function(res2){
+        .then(function(res2) {
+          
+          var data = {
 
+            names: res2
 
- var data = {
+          }
+          console.log(data);
 
-        names: res2
+          res.render("userSearch", {
+            data
+          })
 
+        });
       }
- console.log(data);
-
-      res.render("userSearch", {
-        data
-      })
-
-});
-}
 
       var friendsList = friends.split(",");
 
 
-console.log(friendsList);
+      var friends = friendsList.map(function(names) {
 
+        var rObj = {};
 
+        rObj.name = names;
+        return rObj;
 
-var friends = friendsList.map(function(names){
+      });
 
- var rObj = {};
-
-   rObj.name = names;
-   return rObj;
-
-});
-
-
- db.user.findAll({})
-
- .then(function(res2){
-
- var data = {
-
-        daty: friends,
-        names: res2
-
-      }
- console.log(data);
-
-
-
-      res.render("userSearch", {
-        data
+      db.user.findAll({
+        where: {
+          username: {
+            $ne: results[0].username
+          }
+        }
       })
- })
+
+      .then(function(res2) {
+
+
+        var data = {
+
+          daty: friends,
+          names: res2
+
+        }
+        // console.log(data);
+
+
+
+        res.render("userSearch", {
+          data
+        })
+      })
 
     })
 
-    });
+  });
 
 
 
@@ -256,16 +255,16 @@ var friends = friendsList.map(function(names){
 
       // console.log(data);
       console.log(data.daty[0]);
-     
-        res.render('futureTrips', {
-          data
-        });
-      });
 
+      res.render('futureTrips', {
+        data
+      });
     });
 
+  });
 
- app.post("/add/trip", function(req, res) {
+
+  app.post("/add/trip", function(req, res) {
 
 
     console.log(req.body.results);
@@ -274,31 +273,31 @@ var friends = friendsList.map(function(names){
 
 
 
-for (var i = 0; i < req.body.results.length; i++) {
-  
-var posts = JSON.parse(req.body.results[i]);
+    for (var i = 0; i < req.body.results.length; i++) {
 
-console.log(req.body.results[i]);
+      var posts = JSON.parse(req.body.results[i]);
 
-console.log(posts);
+      console.log(req.body.results[i]);
 
-db.trip.create({
+      console.log(posts);
 
-  tripName: req.body.trip,
-  user: req.body.user,
-  postId: posts
+      db.trip.create({
 
-})
-.then(function(results2){
+          tripName: req.body.trip,
+          user: req.body.user,
+          postId: posts
 
- 
-})
+        })
+        .then(function(results2) {
 
-}
 
- res.end();
+        })
 
-});
+    }
+
+    res.end();
+
+  });
 
   app.get("/edit/:user/:id", function(req, res) {
 
@@ -314,9 +313,9 @@ db.trip.create({
         data: results[0].dataValues
       }
 
-       // console.log(userPost);
+      // console.log(userPost);
 
-      res.render('updatePost', 
+      res.render('updatePost',
         userPost
       );
 
@@ -334,7 +333,7 @@ db.trip.create({
 
     db.trip.destroy({
 
-      where:{
+      where: {
 
         postId: id
       }
@@ -345,7 +344,7 @@ db.trip.create({
 
   });
 
-    app.delete("/delpost", function(req, res) {
+  app.delete("/delpost", function(req, res) {
 
 
     console.log(req.body.id);
@@ -354,7 +353,7 @@ db.trip.create({
 
     db.post.destroy({
 
-      where:{
+      where: {
 
         id: ids
       }
@@ -388,14 +387,6 @@ db.trip.create({
 
 
 
-
-
-
-
-
-
-
-
   app.get("/posts/:user", function(req, res) {
 
     var username = req.params.user
@@ -407,15 +398,15 @@ db.trip.create({
       include: [db.post]
     }).then(function(results) {
 
-    
+
 
       var userPost = {
         data: results[0].dataValues.posts,
         user: username
       }
 
-        // console.log(results[0].username);
-        // console.log(userPost.user);
+      // console.log(results[0].username);
+      // console.log(userPost.user);
 
       res.render('userposts', {
         userPost
@@ -447,13 +438,13 @@ db.trip.create({
 
       // console.log(data);
       console.log(data.daty[0]);
-     
-        res.render('userbook', {
-          data
-        });
-      });
 
+      res.render('userbook', {
+        data
+      });
     });
+
+  });
 
   app.put("/friend", function(req, res) {
 
@@ -461,114 +452,113 @@ db.trip.create({
 
     db.user.findAll({
 
-      where:{
+      where: {
 
         username: req.body.user
 
       }
 
 
-    }).then(function(results){
+    }).then(function(results) {
 
       var friends = results[0].friends;
 
       console.log(friends);
 
-if (friends === null){
+      if (friends === null) {
 
-    var friendsList = [];
+        var friendsList = [];
 
-    friendsList.push(req.body.new);
+        friendsList.push(req.body.new);
 
-}
+      } else {
 
-else{
+        var friendsList = friends.split();
 
-      var friendsList = friends.split(" ");
+        friendsList.push(req.body.new);
 
-      friendsList.push(req.body.new);
-
-    }
+      }
 
       var newList = friendsList.toString();
 
       console.log(newList);
 
-       db.user.update({
+      db.user.update({
 
         friends: newList
-},{
-        where:{
+      }, {
+        where: {
 
           username: req.body.user
 
         }
-})
+      })
 
     });
 
     res.end();
-});
+  });
 
 
-   app.put("/delfriend", function(req, res) {
+  app.put("/delfriend", function(req, res) {
 
 
     // console.log(req.body);
 
 
-db.user.findAll({
+    db.user.findAll({
 
-  where:{
+      where: {
 
-    username: req.body.user
-  }
+        username: req.body.user
+      }
 
-}).then(function(results){
+    }).then(function(results) {
 
-var friends = results[0].friends;
+      var friends = results[0].friends;
 
-// console.log(friends);
+      // console.log(friends);
 
-var friendsList = friends.split(",");
+      var friendsList = friends.split(",");
 
-// console.log(friendsList);
+      // console.log(friendsList);
 
-// for (var i = 0; i < friendsList.length; i++) {
+      // for (var i = 0; i < friendsList.length; i++) {
 
-// console.log(friendsList[i]);
-// console.log(req.body.friend);
+      // console.log(friendsList[i]);
+      // console.log(req.body.friend);
 
-// if (friendsList[i] === req.body.friend) {
+      // if (friendsList[i] === req.body.friend) {
 
 
-  var number = friendsList.indexOf(req.body.friend);
-  console.log(number);
+      var number = friendsList.indexOf(req.body.friend);
+      console.log(number);
 
-  friendsList.splice(number, 1);
-// }
+      friendsList.splice(number, 1);
+      // }
 
-// }
+      // }
 
-   var newList = friendsList.toString();
+      var newList = friendsList.toString();
 
       console.log(newList);
 
-       db.user.update({
+      db.user.update({
 
         friends: newList
-        
-},   {     where:{
+
+      }, {
+        where: {
 
           username: req.body.user
 
         }
-})
+      })
 
     });
 
     res.end();
-});
+  });
 
 
 };
