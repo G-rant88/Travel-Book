@@ -13,13 +13,37 @@
         method: 'GET',
         url: '/future/' + cook + '/' + data.tripName,
         success: function (data) {
+
+          // display dollar signs according to price scale
           
           // attach data to div
           var allPosts = $('<div class="trip-info">');
           for (var i=0; i < data.tripPosts.length; i++) {
-            allPosts.append('<p>' + data.tripPosts[i].name + '</p>');
-            allPosts.append('<p>' + data.tripPosts[i].city + ', ' + data.tripPosts[i].country + '</p>');
-            allPosts.append('<p>' + data.tripPosts[i].categories + '</p><hr>');
+
+            var dollarSigns = '';
+            for (var j=0; j < data.tripPosts[i].price; j++) {
+                dollarSigns += '$';
+            }
+            // display rating according to rating scale
+            var stars = '';
+            var count = 0;
+            // whole stars
+            for (var j=0; j < data.tripPosts[i].rating; j++) {
+                count++;
+                stars += '<i class="material-icons">star</i>';
+            }
+            // fill in remaining scale with empty stars
+            if (count < 5) {
+                for (var j=0; j < (5-count); j++) {
+                    stars += '<i class="material-icons">star_border</i>';
+                }
+            }
+
+            allPosts.append('<p>Place: ' + data.tripPosts[i].name + '</p>');
+            allPosts.append('<p>Location: ' + data.tripPosts[i].city + ', ' + data.tripPosts[i].country + '</p>');
+            allPosts.append('<p>Category: ' + data.tripPosts[i].categories + '</p>');
+            allPosts.append('<p>Rating: ' + stars + '</p>');
+            allPosts.append('<p>Price: ' + dollarSigns + '</p><hr>');            
           }
           // append data to active list item
           $('li.active .collapsible-body').append(allPosts);
