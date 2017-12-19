@@ -25,8 +25,8 @@
     <ul class="collapsible" data-collapsible="accordion">
       {{!-- each list item is a separate trip; opening that trip displays all the amenities  --}}
       {{#each data.daty}}
-      <li>
-        <div class="collapsible-header trip-name" data-trip-name="{{tripName}}" data-status="closed"><i class="material-icons">filter_drama</i>Trip: {{tripName}}</div>
+      <li class="trip-name" data-trip-name="{{tripName}}">
+        <div class="collapsible-header"><i class="material-icons">filter_drama</i>Trip: {{tripName}}</div>
         <div class="collapsible-body">
           {{!-- populate with posts --}}
         </div>
