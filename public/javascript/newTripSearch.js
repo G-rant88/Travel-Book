@@ -48,7 +48,7 @@ $(function() {
                 }
                 event.mapObject.showAsSelected = !event.mapObject.showAsSelected
 
-                searchQuery.country = country.toLowerCase();
+                searchQuery.country = country;
 
                 $('#regions').material_select('destroy');
                 $('#cities').material_select('destroy');
@@ -96,7 +96,7 @@ $(function() {
         // if select is initialized and a city was selected, run search query for cities based on city
         if ($('#cities').hasClass('initialized') && $('#cities').val() !== null) {
             var city = $('#cities option:selected').val();
-            searchQuery.city = city.toLowerCase();
+            searchQuery.city = city;
             // show categories
             $('#categories').material_select();
         }
