@@ -569,4 +569,57 @@ module.exports = function(app) {
 
     res.end();
   });
+
+
+  app.post("/update/trip", function(req, res) {
+
+    console.log(req.body.trip);
+     console.log(req.body.user);
+
+    db.trip.findAll({
+
+      where: {
+
+        user: req.body.user,
+        tripName: req.body.trip
+      }
+    }).then(function(results){
+
+      console.log(results[0]);
+
+      console.log(results[0].postIds);
+
+      var posts = results[0].postIds
+
+      postList = posts.split(", ");
+
+      console.log(postList);
+
+      for (var i = 0; i < req.body.results.length; i++) {
+
+
+        postList.push(req.body.results[i]);
+      }
+
+      var newList = postList.join(", ");
+
+      console.log(newList);
+
+      db.trip.update({
+
+        postIds: newList
+},{
+
+      where:{
+
+        user: req.body.user,
+        tripName: req.body.trip
+      }
+});
+
+    res.end();
+  });
+
+});
+
 };
