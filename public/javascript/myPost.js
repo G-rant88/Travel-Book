@@ -6,26 +6,29 @@
     var data = {
       tripName: $(this).attr('data-trip-name')
     }
-    console.log($(this).hasClass('active'));
-    if (!$(this).hasClass('active')) {
+    // console.log($(this).attr('data-status'));
+    if (!$(this).attr('data-status')) {
+      $(this).attr('data-status', 'populated');      
       $.ajax({
         method: 'GET',
         url: '/future/' + cook + '/' + data.tripName,
-        success: function (data){
+        success: function (data) {
           
           // attach data to div
           var allPosts = $('<div class="trip-info">');
           for (var i=0; i < data.tripPosts.length; i++) {
-            allPosts.append('<p>' + data.tripPosts[i].name + '</p><hr>');
+            allPosts.append('<p>' + data.tripPosts[i].name + '</p>');
+            allPosts.append('<p>' + data.tripPosts[i].city + ', ' + data.tripPosts[i].country + '</p>');
+            allPosts.append('<p>' + data.tripPosts[i].categories + '</p><hr>');
           }
           // append data to active list item
           $('li.active .collapsible-body').append(allPosts);
-          
+
         }
       });
     }
     else {
-      $('.trip-info').remove();
+      console.log('already populated');
     }
   })
   
