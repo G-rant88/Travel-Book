@@ -1,4 +1,6 @@
-  $('.trip-name').click(function (event) {
+ $('.collapsible').collapsible();
+ 
+ $('.trip-name').click(function (event) {
     event.preventDefault();
     var cook = Cookies.get('name');
     var data = {
@@ -15,8 +17,8 @@
           for (var i=0; i < data.tripPosts.length; i++) {
             allPosts.append('<p>' + data.tripPosts[i].name + '</p><hr>');
           }
-          $('div.active').append(allPosts);
-          console.log(allPosts);
+          $('li.active .collapsible-body').append(allPosts);
+          //console.log(allPosts);
           //location.reload();
         }
       });
