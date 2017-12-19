@@ -12,8 +12,7 @@
 }
 
 body {
-    font-family: 'Muli', sans-serif;
-    background-color: #0A2C50;    
+    background-color: #18253A;    
     color: white;
 }
 
@@ -22,12 +21,20 @@ nav {
     text-shadow: 0.5px 0.5px black;
 }
 
-.modal, .side-nav, .trip-name {
+.modal, .side-nav, .trip-name, .card-content {
     color: black;
 }
 
-.side-nav {
-    background-color: #C1752F;
+.add-friend, .delfriend {
+    font-family: 'Muli', sans-serif;
+}
+
+.card-content {
+    background-color: #0A2C50;
+}
+
+.side-nav, .card-action {
+    background-color: #C1752F !important;
 }
 
 .trip-name {
@@ -36,4 +43,21 @@ nav {
 
 .collapsible-body {
     margin: 0px;
+}
+
+.card-action i {
+    color: white !important;
+}
+
+.brand-logo {
+    margin-left: 10px;
+}
+
+.card-content {
+    height: 650px;
+}
+
+.review-text {
+    overflow: auto;
+    height: 100px;
 }
