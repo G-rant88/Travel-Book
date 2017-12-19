@@ -1,6 +1,6 @@
 <nav>
   <div class="nav-wrapper">
-    <a href="#" class="brand-logo">Travel Book</a>
+    <a href="/" class="brand-logo">travelBook</a>
     <ul id="nav-mobile" class="right hide-on-med-and-down">
       <li><a class="loginstuff friendPage">Friends</a></li>
       <li><a  class="loginstuff" href="/add">Add Post</a></li>
@@ -29,10 +29,10 @@
           <span class="card-title">City: {{dataValues.city}}</span>
           <span class="card-title">Place: {{dataValues.name}}</span>
           <img src=https://s3-us-west-2.amazonaws.com/travelbookpictures/{{dataValues.image}} width="100%">
-          <p>Review: {{dataValues.review}}</p>
-          <p><span class="rating">Rating: {{dataValues.rating}}</span></p>
-          <p>Price: {{dataValues.price}}</p>
+          <p>Rating: <span class="rating">{{dataValues.rating}}</span></p>
+          <p>Price: <span class="price">{{dataValues.price}}</span></p>
           <p>Category: {{dataValues.categories}}</p>
+          <p class="review-text">Review: {{dataValues.review}}</p>
           <!-- <p>Written By: {{user.username}}</p> -->
         </div>
            
@@ -48,7 +48,7 @@
     {{!-- liked list as sidenav --}}
     <ul id="slide-out" class="side-nav">
         <li>
-          <h6>For My Trip</h6>
+          <h5>Amenities for my trip <i class="material-icons heart">favorite_border</i></h5>
         </li>
         {{!-- selected items go here as li tags --}}
     </ul>

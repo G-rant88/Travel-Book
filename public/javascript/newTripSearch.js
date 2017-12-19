@@ -23,7 +23,7 @@ $(function() {
 
         "areasSettings": {
             "autoZoom": true,
-            "selectedColor": "#891616",
+            "selectedColor": "#C1752F",
             "selectable": true
         },
 

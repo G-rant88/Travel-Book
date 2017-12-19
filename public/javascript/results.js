@@ -1,4 +1,33 @@
 $(function () {
+    
+    $('.rating').each(function () {
+        var rating = $(this).text();
+        // display rating according to rating scale
+        var stars = '';
+        var count = 0;
+        // whole stars
+        for (var i=0; i < rating; i++) {
+            count++;
+            stars += '<i class="material-icons">star</i>';
+        }
+        // fill in remaining scale with empty stars
+        if (count < 5) {
+            for (var i=0; i < (5-count); i++) {
+                stars += '<i class="material-icons">star_border</i>';
+            }
+        }
+        $(this).html(stars);
+    });
+
+    $('.price').each(function () {
+        var price = $(this).text();
+        var dollarSigns = '';
+        for (var i=0; i < price; i++) {
+            dollarSigns += '$';
+        }
+        $(this).html(dollarSigns);
+    });
+
     // sidenav functionality
     $(".button-collapse").sideNav();
 
