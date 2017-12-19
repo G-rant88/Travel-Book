@@ -16,3 +16,24 @@ body {
     background-color: #0A2C50;    
     color: white;
 }
+
+nav {
+    background-color: #E7B53F;
+    text-shadow: 0.5px 0.5px black;
+}
+
+.modal, .side-nav, .trip-name {
+    color: black;
+}
+
+.side-nav {
+    background-color: #C1752F;
+}
+
+.trip-name {
+    background-color: white;
+}
+
+.collapsible-body {
+    margin: 0px;
+}
