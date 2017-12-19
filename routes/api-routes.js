@@ -181,7 +181,8 @@ module.exports = function(app) {
   
   app.get('/future/:user/:trip', function (req, res) {
     var username = req.params.user;
-    var tripName = req.params.trip;  
+    var tripName = req.params.trip;
+  
 
     db.trip.findOne({
       
@@ -204,15 +205,11 @@ module.exports = function(app) {
             id: postIdInt
           }
         }).then(function (result) {
-          //console.log(result);
-          //console.log('=========');
-          //console.log('postInfo ' + JSON.stringify(postInfo));
           postInfo.push(result);
-          //console.log('postInfo ' + JSON.stringify(postInfo));
           data.tripPosts = postInfo;         
         });
       }).then(function () {
-        res.json(data);
+        res.send(data);
       });
 
     })
