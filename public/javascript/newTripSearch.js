@@ -6,6 +6,10 @@ $(function() {
         categories: null
     }
 
+    $('.cities').hide();
+    $('.categories').hide();
+    $('#trip-search-submit').hide();
+
     // capture country upon map click
     var map = AmCharts.makeChart("chartdiv", {
         "type": "map",
@@ -50,7 +54,6 @@ $(function() {
 
                 searchQuery.country = country;
 
-                $('#regions').material_select('destroy');
                 $('#cities').material_select('destroy');
                 $('#categories').material_select('destroy');
                 // search country code by country name
@@ -81,7 +84,8 @@ $(function() {
                 var city = $('<option>').addClass('city').attr('value', cities[i]).text(cities[i]).attr('link', cities[i].href);
                 $('#cities').append(city);
             }
-            // show cities dropdown newly populated with cities           
+            // show cities dropdown newly populated with cities
+            $('.cities').show();           
             $('#cities').material_select();
 
         });
@@ -98,6 +102,7 @@ $(function() {
             var city = $('#cities option:selected').val();
             searchQuery.city = city;
             // show categories
+            $('.categories').show();                       
             $('#categories').material_select();
         }
     }
@@ -105,6 +110,7 @@ $(function() {
     $('#categories').change(function() {
         var categories = $('#categories').val();
         searchQuery.categories = categories;
+        $('#trip-search-submit').show();
     });
 
     $('#trip-search-submit').click(function(event) {
@@ -113,7 +119,7 @@ $(function() {
         if (searchQuery.categories !== null) {
 
             // redriect url when form is submitted
-            var url = '/search/' + searchQuery.country + '/' + searchQuery.city + '/' + searchQuery.categories.join('+');
+            var url = '/search/' + searchQuery.country + '/' + searchQuery.city + '/' + searchQuery.categories;
 
             // console.log(searchQuery);
             console.log(url);
@@ -123,10 +129,6 @@ $(function() {
         }
     })
 
-});
-
-
-$(document).ready(function() {
     var cook = Cookies.get('name');
 
 

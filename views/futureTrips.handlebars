@@ -17,7 +17,7 @@
     {{!-- page title --}}
 
     <div class="col s12 center-align">
-        <h3 class="names"> Travel Book!</h3>
+        <h3>{{data.user}}'s Travel Book!</h3>
     </div>
     
   <div class="row">
@@ -29,7 +29,6 @@
         <div class="collapsible-header">
           <i class="material-icons">airplanemode_active</i>
           Trip: {{tripName}}
-          <a href="#" class="delete-btn" data-post-id="{{id}}" data-name="{{name}}" data-price="{{price}}" data-rating="{{rating}}" data-categories="{{categories}}" data-review={{review}} data-image="{{image}}"><i class="material-icons heart">delete_forever</i></a>
           </div>
         <div class="collapsible-body row">
           {{!-- populate with posts --}}

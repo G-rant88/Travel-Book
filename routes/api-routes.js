@@ -288,7 +288,8 @@ module.exports = function(app) {
 
       var data = {
         // results is an array of all trips from user
-        daty: results
+        daty: results,
+        user: username
       }
 
       res.render('futureTrips', {
@@ -430,28 +431,25 @@ module.exports = function(app) {
 
   app.get("/book/:user", function(req, res) {
 
-    var username = req.params.user
-
+    var username = req.params.user;
+    console.log(username);
     db.trip.findAll({
 
       where: {
         user: username
       },
-      include: [db.post]
+      // include: [db.post]
 
     }).then(function(results) {
+      //console.log(results[0].postIds.split(', '));
 
       var data = {
-
+        // results is an array of all trips from user
         daty: results,
         user: username
-
       }
 
-      // console.log(data);
-      console.log(data.daty[0]);
-
-      res.render('userbook', {
+      res.render('futureTrips', {
         data
       });
     });

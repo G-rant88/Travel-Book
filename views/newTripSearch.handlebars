@@ -18,25 +18,20 @@
 <div class="container">
     {{!-- page title --}}
     <div class="col s12 center-align">
-        <h2 class="welcome"></h2>
-        <h3>Plan your next trip!</h3>
+        <h3 class="welcome"></h3>
+        <h5>Select your next travel destination!</h5>
     </div>
     {{!-- map --}}
     <div class="col s12 center-align">
         <div id="chartdiv"></div> 
     </div> 
-    {{!-- dropdown options for regions --}}
-    <div class="input-field col s12">
-        <select id="regions">
-        </select>
-    </div>
     {{!-- dropdown options for cities --}}
-    <div class="input-field col s12">
+    <div class="input-field col s12 cities">
         <select id="cities">
         </select>
     </div>
     {{!-- dropdown options for amenities -- can pick multiple --}}
-    <div class="input-field col s12">
+    <div class="input-field col s12 categories">
         <select id="categories">
         <option value="" disabled selected>Choose amenities you'd like to search</option>
         <option value="attractions">Attractions</option>

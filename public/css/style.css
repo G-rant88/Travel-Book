@@ -10,3 +10,9 @@
 #errormsg {
     color: red;
 }
+
+body {
+    font-family: 'Muli', sans-serif;
+    background-color: #0A2C50;    
+    color: white;
+}
