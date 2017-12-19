@@ -301,7 +301,7 @@ module.exports = function(app) {
 
   app.post("/add/trip", function(req, res) {
 
-      var posts = JSON.parse(req.body.results[i]);
+    
 
       db.trip.create({
 
