@@ -59,3 +59,28 @@ var data = {
     });
 
 
+$(".deltrip").on("click", function(event){
+
+var cook = Cookies.get('name');
+var trip = $(this).attr("data-id");
+
+var data = {
+
+    user: cook,
+    trip: trip
+}
+
+   $.ajax({
+            method: 'DELETE',
+            url: '/deltrip',
+            data: data,
+            success: function () {
+                console.log('trip deleted');  
+                location.reload(); 
+            }
+
+        });
+            
+    });
+
+

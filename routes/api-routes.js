@@ -340,15 +340,12 @@ module.exports = function(app) {
   app.delete("/deltrip", function(req, res) {
 
 
-    console.log(req.body.id);
-
-    var id = JSON.parse(req.body.id);
-
     db.trip.destroy({
 
       where: {
 
-        postId: id
+        user: req.body.user,
+        tripName: req.body.trip
       }
 
     })

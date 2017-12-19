@@ -66,27 +66,27 @@
     }
   })
   
-  $('.clear-btn').click(function (event) {
+//   $('.clear-btn').click(function (event) {
 
-  	var ids = $(this).attr("data-post-id");
+//   	var ids = $(this).attr("data-post-id");
 
-  	var datas = {
+//   	var datas = {
 
-  		id: ids
-  	}
+//   		id: ids
+//   	}
 
-  	 $.ajax("/deltrip", {
-      type: "DELETE",
-      data: datas
-    }).then(
-      function(event) {
+//   	 $.ajax("/deltrip", {
+//       type: "DELETE",
+//       data: datas
+//     }).then(
+//       function(event) {
         
-        location.reload();
+//         location.reload();
       
 
-  });
+//   });
 
-});
+// });
 
 
     $('.delete-btn').click(function (event) {
