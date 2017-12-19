@@ -17,8 +17,14 @@
           // display dollar signs according to price scale
           
           // attach data to div
-          var allPosts = $('<div class="trip-info">');
           for (var i=0; i < data.tripPosts.length; i++) {
+            var newRow = $('<div class="row">')
+            var images = $('<div class="col s3">')
+            var allPosts = $('<div class="col s7 trip-info">');
+
+            var imageSrc = 'https://s3-us-west-2.amazonaws.com/travelbookpictures/' + data.tripPosts[i].image;
+            var image = $('<img class="circle responsive-img">');
+            image.attr('src', imageSrc);
 
             var dollarSigns = '';
             for (var j=0; j < data.tripPosts[i].price; j++) {
@@ -39,15 +45,19 @@
                 }
             }
 
+            images.append(image); 
             allPosts.append('<p>Place: ' + data.tripPosts[i].name + '</p>');
             allPosts.append('<p>Location: ' + data.tripPosts[i].city + ', ' + data.tripPosts[i].country + '</p>');
             allPosts.append('<p>Category: ' + data.tripPosts[i].categories + '</p>');
             allPosts.append('<p>Rating: ' + stars + '</p>');
-            allPosts.append('<p>Price: ' + dollarSigns + '</p><hr>');            
+            allPosts.append('<p>Price: ' + dollarSigns + '</p>');    
+            
+            $(newRow).append(images);
+            $(newRow).append(allPosts);
+            $('li.active .collapsible-body').append(newRow);
+            $('li.active .collapsible-body').append('<hr>');
           }
-          // append data to active list item
-          $('li.active .collapsible-body').append(allPosts);
-
+          // append data to active list item          
         }
       });
     }
