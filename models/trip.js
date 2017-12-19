@@ -3,14 +3,15 @@ module.exports = function(sequelize, DataTypes) {
     
     tripName: DataTypes.STRING,
     user: DataTypes.STRING,
+    postIds: DataTypes.STRING
   });
 
-  trip.associate = function(models) {
-    trip.belongsTo(models.post, {
-      foreignKey: {
-        allowNull: false
-      }
-    });
-  }
+  // trip.associate = function(models) {
+  //   trip.belongsTo(models.post, {
+  //     foreignKey: {
+  //       allowNull: false
+  //     }
+  //   });
+  // }
   return trip;
 };

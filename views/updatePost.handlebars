@@ -20,11 +20,13 @@
       <div class="input-field col s12" >
         <label for="place"></label>
         <input name='place' id="place" placeholder="Place" type="text" data-error=".errorTxt1" value="{{data.name}}">
+
         <div class="errorTxt1" id="errormsg"></div>
       </div>
       <div class="input-field col s12" >
         <label for="cityC"></label>
         <input name='cityC' id="cityC" placeholder="City" type="text" data-error=".errorTxt2" value="{{data.city}}" >
+
         <div class="errorTxt2" id="errormsg"></div>
       </div>
       <div class="input-field col s12" >
@@ -66,12 +68,12 @@
       </div>
       <div class="input-field col s12">
         <label for="textarea1">Enter your review</label>
-        <textarea name='review' id="review" class="materialize-textarea" type="text" data-error=".errorTxt7">{{data.review}}</textarea>
+        <textarea name='review' id="review" class="materialize-textarea" type="text" data-error=".errorTxt7"></textarea>
         <div class="errorTxt7" id="errormsg"></div>
       </div>
       </div>
       <div class="input-field col s12">
-        <button class="waves-effect waves-light btn" id="updatePost">Update</button>
+        <button class="waves-effect waves-light btn"id="updatePost">Update</button>
       </div>
     </form>
   </div>

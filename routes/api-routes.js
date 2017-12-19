@@ -234,27 +234,62 @@ module.exports = function(app) {
 
   });
 
+  var Promise = require("bluebird");
+  
+  app.get('/future/:user/:trip', function (req, res) {
+    var username = req.params.user;
+    var tripName = req.params.trip;
+  
+
+    db.trip.findOne({
+      
+      where: {
+        tripName: tripName
+      }
+
+    }).then(function(results){
+
+      var postIds = results.postIds.split(', ');
+      var postInfo = [];
+      var data = {
+        tripPosts: null
+      };
+
+      Promise.map(postIds, function (postId) {
+        var postIdInt = parseInt(postId);
+        return db.post.findOne({
+          where: {
+            id: postIdInt
+          }
+        }).then(function (result) {
+          postInfo.push(result);
+          data.tripPosts = postInfo;         
+        });
+      }).then(function () {
+        res.send(data);
+      });
+
+    })
+  });
+
   app.get("/future/:user", function(req, res) {
 
-    var username = req.params.user
-
+    var username = req.params.user;
+    console.log(username);
     db.trip.findAll({
 
       where: {
         user: username
       },
-      include: [db.post]
+      // include: [db.post]
 
     }).then(function(results) {
+      //console.log(results[0].postIds.split(', '));
 
       var data = {
-
+        // results is an array of all trips from user
         daty: results
-
       }
-
-      // console.log(data);
-      console.log(data.daty[0]);
 
       res.render('futureTrips', {
         data
@@ -266,36 +301,18 @@ module.exports = function(app) {
 
   app.post("/add/trip", function(req, res) {
 
-
-    console.log(req.body.results);
-    console.log(req.body.trip);
-    console.log(req.body.user);
-
-
-
-    for (var i = 0; i < req.body.results.length; i++) {
-
       var posts = JSON.parse(req.body.results[i]);
-
-      console.log(req.body.results[i]);
-
-      console.log(posts);
 
       db.trip.create({
 
-          tripName: req.body.trip,
-          user: req.body.user,
-          postId: posts
+      tripName: req.body.trip,
+      user: req.body.user,
+      postIds: req.body.results
 
-        })
-        .then(function(results2) {
-
-
-        })
-
-    }
-
-    res.end();
+    })
+    .then(function(results2){
+      res.end();
+    })
 
   });
 
@@ -307,17 +324,14 @@ module.exports = function(app) {
       },
     }).then(function(results) {
 
-      // console.log(results[0].dataValues);
-
       var userPost = {
-        data: results[0].dataValues
+        data: results[0].dataValues.posts
       }
 
-      // console.log(userPost);
 
-      res.render('updatePost',
+      res.render('updatePost', {
         userPost
-      );
+      });
 
     });
 
@@ -559,6 +573,4 @@ module.exports = function(app) {
 
     res.end();
   });
-
-
 };

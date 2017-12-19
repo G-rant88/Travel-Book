@@ -77,15 +77,17 @@ $(function () {
 
         var cook = Cookies.get('name');
 
+        var joinedItems = previousItems.join(', ');
+        console.log(joinedItems);
 
         var previousTrip = {
             trip: previousTripName,
             user: cook,
-            results: previousItems
+            results: joinedItems
         };
 
 
-        console.log(previousTrip);
+        console.log(previousTrip.results);
 
     
         // // post request to update previous trip
