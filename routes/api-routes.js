@@ -177,10 +177,51 @@ module.exports = function(app) {
 
   });
 
+  var Promise = require("bluebird");
+  
+  app.get('/future/:user/:trip', function (req, res) {
+    var username = req.params.user;
+    var tripName = req.params.trip;  
+
+    db.trip.findOne({
+      
+      where: {
+        tripName: tripName
+      }
+
+    }).then(function(results){
+
+      var postIds = results.postIds.split(', ');
+      var postInfo = [];
+      var data = {
+        tripPosts: null
+      };
+
+      Promise.map(postIds, function (postId) {
+        var postIdInt = parseInt(postId);
+        return db.post.findOne({
+          where: {
+            id: postIdInt
+          }
+        }).then(function (result) {
+          //console.log(result);
+          //console.log('=========');
+          //console.log('postInfo ' + JSON.stringify(postInfo));
+          postInfo.push(result);
+          //console.log('postInfo ' + JSON.stringify(postInfo));
+          data.tripPosts = postInfo;         
+        });
+      }).then(function () {
+        res.json(data);
+      });
+
+    })
+  });
+
   app.get("/future/:user", function(req, res) {
 
-    var username = req.params.user
-
+    var username = req.params.user;
+    console.log(username);
     db.trip.findAll({
 
       where: {
@@ -194,41 +235,6 @@ module.exports = function(app) {
       var data = {
         // results is an array of all trips from user
         daty: results
-      }
-
-      for (var i=0; i < results.length; i++) {
-        // convert string to array for postids
-        results[i].postIds = results[i].postIds.split(', ');
-      }
-
-      // console.log(results[0].postIds);
-
-      // run this function through each postIds list
-      function findPost (postId) {
-        var postIdInt = parseInt(postId);
-        return db.post.findOne({
-          where: {
-            id: postIdInt
-          }
-        });
-      }
-
-      for (var i=0; i < results.length; i++) {
-        var postInfo = [];
-        // array of postids per trip
-        var postIds = results[i].postIds;
-        // console.log(postIds);
-        var nestResult = results[i];
-        for (var j=0; j < postIds.length; j++) {
-          findPost(postIds[j]).then(function (result) {
-            console.log(result);
-            console.log('=========');
-            postInfo.push(result);
-            data[nestResult.tripName] = postInfo;
-            console.log("229" + JSON.stringify(data[nestResult.tripName]));
-            
-          });
-        }   
       }
 
       res.render('futureTrips', {
