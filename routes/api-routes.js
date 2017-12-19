@@ -323,15 +323,13 @@ module.exports = function(app) {
         id: req.params.id
       },
     }).then(function(results) {
-
+     
       var userPost = {
-        data: results[0].dataValues.posts
+        data: results[0].dataValues
       }
+      console.log(userPost);
 
-
-      res.render('updatePost', {
-        userPost
-      });
+      res.render('updatePost', userPost);
 
     });
 
@@ -387,8 +385,8 @@ module.exports = function(app) {
       city: req.body.city,
       country: req.body.country,
       categories: req.body.categories,
-      rating: req.body.rating,
-      price: req.body.price,
+      rating: parseInt(req.body.rating),
+      price: parseInt(req.body.price),
       review: req.body.review
     }, {
       where: {
