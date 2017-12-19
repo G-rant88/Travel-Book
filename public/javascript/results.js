@@ -113,13 +113,28 @@ $(function () {
 
 
    $('.update-list-btn').click(function (event) {
+
+   var  nameflag = true;
         // prevent refresh of page
         event.preventDefault();
         
         // names for trips
         var previousTripName = $('.previous-trip-name').val();
-       
-        
+
+        var cook = Cookies.get('name');
+
+
+            $.ajax({
+            method: 'GET',
+            url: '/get/trip',
+            success: function (results) {
+
+                console.log(results);
+
+            for (var i = 0; i < results.length; i++) {
+        if(results[i].tripName === previousTripName && results[i].user === cook && nameflag === true){
+
+            nameflag = false;
         // separate data for items for previous trips and future trips
         var previousItems = [];
 
@@ -129,7 +144,7 @@ $(function () {
             previousItems.push($(this).attr('data-post-id'));
         });
 
-        var cook = Cookies.get('name');
+        
 
         var joinedItems = previousItems.join(', ');
         console.log(joinedItems);
@@ -155,5 +170,13 @@ $(function () {
             }
         });
             location.reload(); 
+ 
+            }}
+
+        $(".triperror").html("Wrong Trip Name, Try Again!");
+        $(".triperror").css("color", "red");
+
+   }
     });
-   
+      
+        });
