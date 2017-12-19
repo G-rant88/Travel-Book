@@ -110,3 +110,50 @@ $(function () {
     location.assign("/edit/"+cook+"/"+ids);
 
 });
+
+
+   $('.update-list-btn').click(function (event) {
+        // prevent refresh of page
+        event.preventDefault();
+        
+        // names for trips
+        var previousTripName = $('.previous-trip-name').val();
+       
+        
+        // separate data for items for previous trips and future trips
+        var previousItems = [];
+
+
+        // add all items user wants to add to previous trip to specified 'previous' list
+        $('.previous').each(function () {
+            previousItems.push($(this).attr('data-post-id'));
+        });
+
+        var cook = Cookies.get('name');
+
+        var joinedItems = previousItems.join(', ');
+        console.log(joinedItems);
+
+        var previousTrip = {
+            trip: previousTripName,
+            user: cook,
+            results: previousItems
+        };
+
+
+        console.log(previousTrip.results);
+
+    
+        // // post request to update previous trip
+        $.ajax({
+            method: 'POST',
+            url: '/update/trip',
+            data: previousTrip,
+            success: function () {
+                console.log('Updated trip');  
+
+            }
+        });
+            location.reload(); 
+    });
+   
