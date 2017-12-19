@@ -98,7 +98,7 @@
       id: ids
     }
 
-     $.ajax("/deltrip", {
+     $.ajax("/delpost", {
       type: "DELETE",
       data: datas
     }).then(
