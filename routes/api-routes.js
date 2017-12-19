@@ -160,7 +160,7 @@ module.exports = function(app) {
             names: res2
 
           }
-          console.log(data);
+          // console.log(data);
 
           res.render("userSearch", {
             data
@@ -170,6 +170,8 @@ module.exports = function(app) {
       }
 
       var friendsList = friends.split(",");
+      var availableFriends = friends.split(",");
+      availableFriends.push(results[0].username);
 
 
       var friends = friendsList.map(function(names) {
@@ -181,10 +183,11 @@ module.exports = function(app) {
 
       });
 
+      
       db.user.findAll({
         where: {
           username: {
-            $ne: results[0].username
+            $notIn: availableFriends
           }
         }
       })
@@ -198,9 +201,6 @@ module.exports = function(app) {
           names: res2
 
         }
-        // console.log(data);
-
-
 
         res.render("userSearch", {
           data
