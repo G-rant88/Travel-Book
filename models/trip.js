@@ -5,13 +5,5 @@ module.exports = function(sequelize, DataTypes) {
     user: DataTypes.STRING,
     postIds: DataTypes.STRING
   });
-
-  // trip.associate = function(models) {
-  //   trip.belongsTo(models.post, {
-  //     foreignKey: {
-  //       allowNull: false
-  //     }
-  //   });
-  // }
   return trip;
 };

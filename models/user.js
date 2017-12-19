@@ -11,7 +11,6 @@ user.associate = function(models) {
     user.hasMany(models.post, {
       onDelete: "cascade"
     });
-  };
-  
+  }; 
   return user;
 };

@@ -1,27 +1,24 @@
 <nav>
-    <div class="nav-wrapper">
-        <a href="#" class="brand-logo">Travel Book</a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><a class="loginstuff friendPage">Friends</a></li>
-            <li><a  class="loginstuff" href="/add">Add Post</a></li>
-    <li><a class="loginstuff saved">My Posts</a></li>
-        <li><a class="loginstuff future">My Travel Book</a></li>
-        <li><a href="/">Plan New Trip</a></li>
-        <li><a class="login">Login</a></li>
-          <li><a class="logout">Logout</a></li>
-        </ul>
-    </div>
+  <div class="nav-wrapper">
+    <a href="#" class="brand-logo">Travel Book</a>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li><a class="loginstuff friendPage">Friends</a></li>
+      <li><a  class="loginstuff" href="/add">Add Post</a></li>
+      <li><a class="loginstuff saved">My Posts</a></li>
+      <li><a class="loginstuff future">My Travel Book</a></li>
+      <li><a href="/">Plan New Trip</a></li>
+      <li><a class="login">Login</a></li>
+      <li><a class="logout">Logout</a></li>
+    </ul>
+  </div>
 </nav>
-
 <div class="container">
-    {{!-- page title --}}
-
-    <div class="col s12 center-align">
-        <h3>{{data.user}}'s Travel Book!</h3>
-    </div>
-    
+  {{!-- page title --}}
+  <div class="col s12 center-align">
+    <h3>{{data.user}}'s Travel Book!</h3>
+  </div>
+  
   <div class="row">
-      
     <ul class="collapsible" data-collapsible="accordion">
       {{!-- each list item is a separate trip; opening that trip displays all the amenities  --}}
       {{#each data.daty}}
@@ -29,17 +26,15 @@
         <div class="collapsible-header">
           <i class="material-icons">airplanemode_active</i>
           Trip: {{tripName}}
-          </div>
+        </div>
         <div class="collapsible-body row">
           {{!-- populate with posts --}}
         </div>
       </li>
       {{/each}}
     </ul>
-
   </div>
-
-      
+  
 </div>
 
 {{>login}}

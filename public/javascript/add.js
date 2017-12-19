@@ -121,6 +121,5 @@ function initMap() {
 
     console.log($('#place').val(), $('#cityC').val(), $('#countryC').val());
 
-
   });
 };

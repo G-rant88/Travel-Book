@@ -18,12 +18,6 @@ post.associate = function(models) {
         allowNull: false
       }
     });
-    // post.hasMany(models.trip, {
-    //   foreignKey: {
-    //     allowNull: false
-    //   }
-    // });
 }
-
   return post;
 };

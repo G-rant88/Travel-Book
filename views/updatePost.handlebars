@@ -1,9 +1,9 @@
 <nav>
-    <div class="nav-wrapper">
-        <a href="#" class="brand-logo">Travel Book</a>
-        <ul id="nav-mobile" class="right hide-on-med-and-down">
-               <li><a class="loginstuff friendPage">Friends</a></li>
-            <li><a  class="loginstuff" href="/add">Add Post</a></li>
+  <div class="nav-wrapper">
+    <a href="#" class="brand-logo">Travel Book</a>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li><a class="loginstuff friendPage">Friends</a></li>
+      <li><a  class="loginstuff" href="/add">Add Post</a></li>
       <li><a class="loginstuff saved">My Posts</a></li>
       <li><a class="loginstuff future">My Travel Book</a></li>
       <li><a href="/">Plan New Trip</a></li>
@@ -25,7 +25,6 @@
       <div class="input-field col s12" >
         <label for="cityC"></label>
         <input name='cityC' id="cityC" placeholder="City" type="text" data-error=".errorTxt2" value="{{data.city}}" >
-
         <div class="errorTxt2" id="errormsg"></div>
       </div>
       <div class="input-field col s12" >
@@ -70,13 +69,12 @@
         <textarea name='review' id="review" class="materialize-textarea" type="text" data-error=".errorTxt7">{{data.review}}</textarea>
         <div class="errorTxt7" id="errormsg"></div>
       </div>
-      </div>
-      <div class="input-field col s12">
-        <button class="waves-effect waves-light btn"id="updatePost">Update</button>
-      </div>
-    </form>
-  </div>
+    </div>
+    <div class="input-field col s12">
+      <button class="waves-effect waves-light btn"id="updatePost">Update</button>
+    </div>
+  </form>
 </div>
-
+</div>
 
 {{>login}}
