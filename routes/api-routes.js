@@ -446,11 +446,10 @@ module.exports = function(app) {
         user: username
       }
 
-      res.render('futureTrips', {
+      res.render('userbook', {
         data
       });
     });
-
   });
 
   app.put("/friend", function(req, res) {
