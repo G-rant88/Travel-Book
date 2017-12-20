@@ -202,9 +202,10 @@ $('.update-list-btn').click(function(event) {
 
                 }
             }
-
+            if (nameflag === true){
             $(".triperror").html("Wrong Trip Name, Try Again!");
             $(".triperror").css("color", "red");
+        }
 
         }
     });
