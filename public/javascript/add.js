@@ -9,15 +9,15 @@ $(document).ready(function() {
     rules: {
       place: {
         required: true,
-        minlength: 5
+        minlength: 1
       },
       cityC: {
         required: true,
-        minlength: 5
+        minlength: 1
       },
       countryC: {
         required: true,
-        minlength: 5
+        minlength: 1
       },
       category: {
         required: true,
