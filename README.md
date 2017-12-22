@@ -12,3 +12,6 @@
 	<li>add friends and view their posts/trips</li>
 	<li>search all posts based on countries/cities/categories</li>
 </ul>
+
+<img src="https://media.giphy.com/media/xT1R9ZQd4txJ2O65z2/giphy.gif" alt="gif">
+full video demo: (https://www.youtube.com/watch?v=KfeK9V0GyWc)
